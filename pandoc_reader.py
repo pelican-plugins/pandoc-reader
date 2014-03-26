@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 from pelican import signals
 from pelican.readers import BaseReader
@@ -28,6 +29,7 @@ class NewReader(BaseReader):
                 meta = self.process_metadata(name, value)
                 metadata[name] = meta
 
+        os.chdir(self.settings['PATH']) # change the cwd to the content dir
         if 'PANDOC_ARGS' in self.settings:
             output = pypandoc.convert(MD, 'html5', format='md', extra_args=self.settings['PANDOC_ARGS'])
         else:
