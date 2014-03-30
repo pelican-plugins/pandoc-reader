@@ -1,25 +1,26 @@
 import os
-from datetime import datetime
 from pelican import signals
 from pelican.readers import BaseReader
+from pelican.utils import pelican_open
 import pypandoc
 
 class NewReader(BaseReader):
     enabled = True
     file_extensions = ['md', 'markdown', 'mkd', 'mdown']
 
+
     def read(self, filename):
-        with open(filename) as file:
+        with pelican_open(filename) as text:
             metadata_items = []
             in_content = False
             MD = ''
-            for line in file.readlines():
+            for line in text.splitlines():
                 splitted = line.split(':', 1)
                 if len(splitted) == 2 and not in_content:
                     metadata_items.append(splitted)
                 else:
                     in_content = True
-                    MD += line
+                    MD += line + '\n'
 
             metadata = {}
             for item in metadata_items:
