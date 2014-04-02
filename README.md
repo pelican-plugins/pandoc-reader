@@ -14,7 +14,7 @@ Requirements
 Installation
 ------------
 
-Instructions for installation of pelican plugins can be obtained here: [manual](https://github.com/getpelican/pelican-plugins/blob/master/Readme.rst)
+Instructions for installation of pelican plugins can be obtained from the [pelican plugin manual](https://github.com/getpelican/pelican-plugins/blob/master/Readme.rst).
 
 
 Configuration
