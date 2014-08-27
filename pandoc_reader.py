@@ -4,10 +4,10 @@ from pelican.readers import BaseReader
 from pelican.utils import pelican_open
 import pypandoc
 
-class NewReader(BaseReader):
+
+class PandocReader(BaseReader):
     enabled = True
     file_extensions = ['md', 'markdown', 'mkd', 'mdown']
-
 
     def read(self, filename):
         with pelican_open(filename) as text:
@@ -23,23 +23,21 @@ class NewReader(BaseReader):
                     MD += line + '\n'
 
             metadata = {}
-            for item in metadata_items:
-                name, value = item
+            for name, value in metadata_items:
                 name = name.lower()
                 value = value.strip()
-                meta = self.process_metadata(name, value)
-                metadata[name] = meta
+                metadata[name] = self.process_metadata(name, value)
 
         os.chdir(self.settings['PATH']) # change the cwd to the content dir
-        if 'PANDOC_ARGS' in self.settings:
-            output = pypandoc.convert(MD, 'html5', format='md', extra_args=self.settings['PANDOC_ARGS'])
-        else:
-            output = pypandoc.convert(MD, 'html5', format='md')
+        if not 'PANDOC_ARGS' in self.settings: self.settings['PANDOC_ARGS'] = []
+        output = pypandoc.convert(MD, 'html5', format='md', extra_args=self.settings['PANDOC_ARGS'])
 
         return output, metadata
 
+
 def add_reader(readers):
-    readers.reader_classes['md'] = NewReader
+    readers.reader_classes['md'] = PandocReader
+
 
 def register():
     signals.readers_init.connect(add_reader)
