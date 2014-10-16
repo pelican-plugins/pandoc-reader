@@ -1,7 +1,7 @@
 pandoc_reader
 =============
 
-A pandoc markdown reader plugin for pelican
+A pandoc [markdown] reader plugin for [pelican]
 
 
 Requirements
@@ -41,6 +41,7 @@ Contributing
 5. Create new Pull Request
 
 
-
+[markdown]: http://daringfireball.net/projects/markdown/
 [pandoc]: http://johnmacfarlane.net/pandoc/
+[pelican]: http://getpelican.com
 [pypandoc]: https://github.com/bebraw/pypandoc
