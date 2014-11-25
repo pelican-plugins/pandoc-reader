@@ -36,8 +36,8 @@ class PandocReader(BaseReader):
 
 
 def add_reader(readers):
-    readers.reader_classes['md'] = PandocReader
-
+    for ext in PandocReader.file_extensions:
+        readers.reader_classes[ext] = PandocReader
 
 def register():
     signals.readers_init.connect(add_reader)
