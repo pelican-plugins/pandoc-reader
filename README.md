@@ -7,7 +7,6 @@ A pandoc [markdown] reader plugin for [pelican]
 Requirements
 ------------
 
-  - [pypandoc]
   - [pandoc] in $PATH
 
 
@@ -30,6 +29,13 @@ Additional command line parameters can be passed to pandoc via the PANDOC_ARGS p
       '--number-sections',
     ]
 
+Pandoc's markdown extensions can be enabled or disabled via the
+PANDOC_EXTENSIONS parameter.
+
+    PANDOC_EXTENSIONS = [
+      '+hard_line_breaks',
+      '-citations'
+    ]
 
 Contributing
 ------------
@@ -44,4 +50,3 @@ Contributing
 [markdown]: http://daringfireball.net/projects/markdown/
 [pandoc]: http://johnmacfarlane.net/pandoc/
 [pelican]: http://getpelican.com
-[pypandoc]: https://github.com/bebraw/pypandoc
