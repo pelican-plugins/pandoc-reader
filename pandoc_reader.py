@@ -1,5 +1,4 @@
 import subprocess
-
 from pelican import signals
 from pelican.readers import BaseReader
 from pelican.utils import pelican_open
@@ -42,7 +41,8 @@ class PandocReader(BaseReader):
         return output, metadata
 
 def add_reader(readers):
-    readers.reader_classes['md'] = PandocReader
+    for ext in PandocReader.file_extensions:
+        readers.reader_classes[ext] = PandocReader
 
 def register():
     signals.readers_init.connect(add_reader)
