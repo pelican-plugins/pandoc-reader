@@ -1,52 +1,57 @@
-pandoc_reader
-=============
+Pandoc Reader: A Plugin for Pelican
+===================================
 
-A pandoc [markdown] reader plugin for [pelican]
+[![Build Status](https://img.shields.io/github/workflow/status/pelican-plugins/pandoc-reader/build)](https://github.com/pelican-plugins/pandoc-reader/actions) [![PyPI Version](https://img.shields.io/pypi/v/pelican-pandoc-reader)](https://pypi.org/project/pelican-pandoc-reader/) ![License](https://img.shields.io/pypi/l/pelican-pandoc-reader?color=blue)
 
+Pandoc Reader is a Pelican plugin for processing [Markdown][] content with [Pandoc][].
 
 Requirements
 ------------
 
-  - [pandoc] in $PATH
-
+  - `pandoc` executable in $PATH
 
 Installation
 ------------
 
-Instructions for installation of pelican plugins can be obtained from the [pelican plugin manual](https://github.com/getpelican/pelican-plugins/blob/master/Readme.rst).
+This plugin can be installed via:
 
+    python -m pip install pelican-pandoc-reader
 
 Configuration
 -------------
 
-Additional command line parameters can be passed to pandoc via the PANDOC_ARGS parameter.
+Additional command-line parameters can be passed to `pandoc` via the `PANDOC_ARGS` parameter:
 
     PANDOC_ARGS = [
-      '--mathjax',
-      '--smart',
-      '--toc',
-      '--toc-depth=2',
-      '--number-sections',
+      "--mathjax",
+      "--smart",
+      "--toc",
+      "--toc-depth=2",
+      "--number-sections",
     ]
 
-Pandoc's markdown extensions can be enabled or disabled via the
-PANDOC_EXTENSIONS parameter.
+Pandoc's Markdown extensions can be enabled or disabled via the `PANDOC_EXTENSIONS` parameter:
 
     PANDOC_EXTENSIONS = [
-      '+hard_line_breaks',
-      '-citations'
+      "+hard_line_breaks",
+      "-citations"
     ]
 
 Contributing
 ------------
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+Contributions are welcome and much appreciated. Every little bit helps. You can contribute by improving the documentation, adding missing features, and fixing bugs. You can also help out by reviewing and commenting on [existing issues][].
+
+To start contributing to this plugin, review the [Contributing to Pelican][] documentation, beginning with the **Contributing Code** section.
+
+[existing issues]: https://github.com/pelican-plugins/pandoc-reader/issues
+[Contributing to Pelican]: https://docs.getpelican.com/en/latest/contribute.html
+
+License
+-------
+
+This project is licensed under the AGPL-3.0 license.
 
 
-[markdown]: http://daringfireball.net/projects/markdown/
-[pandoc]: http://johnmacfarlane.net/pandoc/
-[pelican]: http://getpelican.com
+[Markdown]: https://daringfireball.net/projects/markdown/
+[Pandoc]: https://pandoc.org/
