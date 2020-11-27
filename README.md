@@ -90,7 +90,7 @@ PANDOC_EXTENSIONS = [
 
 The second method involves specifying the path(s) to one or more [Pandoc default files][], with all your preferences written in YAML format.
 
-These paths should be set in your `pelicanconf.py` file by using the setting `PANDOC_DEFAULT_FILES`. The paths may be absolute or relative, but relative paths are recommended as they are more portable.
+These paths should be set in your Pelican settings file by using the setting `PANDOC_DEFAULT_FILES`. The paths may be absolute or relative, but relative paths are recommended as they are more portable.
 
 ```python
 PANDOC_DEFAULT_FILES = [
@@ -197,7 +197,7 @@ Or in a Pandoc default file:
 csl: "https://www.zotero.org/styles/ieee-with-url"
 ```
 
-Specifying a *remote* (that is, not local) CSL file as shown above dramatically increases the time taken to process Markdown content. To improve processing speed, it is highly recommended that you use a local copy of the CSL file downloaded from Zotero.
+Specifying a *remote* (that is, not local) CSL file as shown above dramatically increases the time taken to process Markdown content. To improve processing speed, it is _highly_ recommended that you use a local copy of the CSL file downloaded from Zotero.
 
 You may then reference it in your Pelican settings file as shown below:
 
@@ -247,7 +247,6 @@ License
 -------
 
 This project is licensed under the AGPL-3.0 license.
-
 
 [Pelican]: https://getpelican.com
 [Pandoc’s variant of Markdown]: https://pandoc.org/MANUAL.html#pandocs-markdown
