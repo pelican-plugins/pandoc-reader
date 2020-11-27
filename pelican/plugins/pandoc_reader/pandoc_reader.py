@@ -1,4 +1,4 @@
-"""Reader that processes Pandoc Markdown and returns HTML 5."""
+"""Reader that processes Pandoc Markdown and returns HTML5."""
 import math
 import os
 import shutil
@@ -41,7 +41,7 @@ class PandocReader(BaseReader):
         if not shutil.which("pandoc"):
             raise Exception("Could not find Pandoc. Please install.")
 
-        # Open markdown file and read content
+        # Open Markdown file and read content
         content = ""
         with pelican_open(source_path) as file_content:
             content = file_content
@@ -324,7 +324,7 @@ class PandocReader(BaseReader):
 
             # Check to see if the reader_prefix matches a valid input
             if not reader_prefix.startswith(VALID_INPUT_FORMATS):
-                raise ValueError("Input type has to be a markdown variant.")
+                raise ValueError("Input type has to be a Markdown variant.")
         return reader
 
     @staticmethod
