@@ -1,0 +1,10 @@
+# invalid_writer_output_format.yaml
+#
+# A test default file that sets writer to an invalid output format
+#
+reader: markdown+smart+citations+implicit_figures
+writer: myoutputformat
+
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"

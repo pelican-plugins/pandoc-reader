@@ -1,0 +1,10 @@
+# valid_defaults.yml
+#
+# A test default file that is valid
+#
+reader: markdown+smart+citations+implicit_figures
+writer: html5
+
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"

@@ -1,0 +1,11 @@
+# to_writer_both_given.yaml
+#
+# A test default file that sets both reader and from
+#
+reader: markdown+smart+citations+implicit_figures
+to: html5
+writer: html5
+
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
