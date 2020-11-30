@@ -24,7 +24,17 @@ ENCODED_LINKS_TO_RAW_LINKS_MAP = {
     "%7Bfilename%7D": "{filename}",
 }
 
-VALID_INPUT_FORMATS = ("markdown", "commonmark", "gfm")
+# Markdown variants supported in default files
+# Update as Pandoc adds or removes support for formats
+VALID_INPUT_FORMATS = (
+    "commonmark",
+    "commonmark_x",
+    "gfm",
+    "markdown",
+    "markdown_mmd",
+    "markdown_phpextra",
+    "markdown_strict",
+)
 VALID_OUTPUT_FORMATS = ("html", "html5")
 UNSUPPORTED_ARGUMENTS = ("--standalone", "--self-contained")
 VALID_BIB_EXTENSIONS = ["json", "yaml", "bibtex", "bib"]
@@ -341,8 +351,8 @@ class PandocReader(BaseReader):
 
             reader_prefix = reader.replace("+", "-").split("-")[0]
 
-            # Check to see if the reader_prefix matches a valid input
-            if not reader_prefix.startswith(VALID_INPUT_FORMATS):
+            # Check to see if the reader_prefix matches a valid input format
+            if reader_prefix not in VALID_INPUT_FORMATS:
                 raise ValueError("Input type has to be a Markdown variant.")
         return reader
 
