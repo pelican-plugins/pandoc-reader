@@ -157,15 +157,6 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
         self.assertEqual("Valid Content With Citation", str(metadata["title"]))
         self.assertEqual("My Author", str(metadata["author"]))
         self.assertEqual("2020-10-16 00:00:00", str(metadata["date"]))
-        self.assertEqual(
-            (
-                "<p>But this foundational principle of science has now been"
-                " called into question by"
-                ' <a href="https://www.britannica.com/science/string-theory">'
-                "String Theory</a>.</p>\n"
-            ),
-            str(metadata["summary"]),
-        )
 
     def test_citations_2(self):
         """Check if output and citations through --citeproc argument is valid."""

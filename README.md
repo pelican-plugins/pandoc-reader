@@ -43,7 +43,7 @@ data: "<date>"
 … or …
 
 ```yaml
-...
+---
 title: "<post-title>"
 author: "<author-name>"
 date: "<date>"
@@ -52,7 +52,7 @@ date: "<date>"
 
 > ⚠️ **Note:** The YAML-formatted header shown above is syntax specific to Pandoc for specifying content metadata. This is different from Pelican’s front-matter format. If you ever decide to stop using this plugin and switch to Pelican’s default Markdown handling, you may need to switch your front-matter metadata to [Python-Markdown’s Meta-Data format](https://python-markdown.github.io/extensions/meta_data/).
 
-YAML blocks that define more than one level (such as YAML lists) are not supported, even though they are supported by Pandoc. This is due to metadata processing limitations. In cases where you would normally add a YAML list, use a comma-separated string instead. For more information about this:
+For more information on Pandoc's YAML metadata block or Pelican's default metadata format please visit the links below:
 
 * [Pandoc’s YAML metadata blocks](https://pandoc.org/MANUAL.html#metadata-blocks)
 * [Pelican’s default metadata format](https://docs.getpelican.com/en/stable/content.html#file-metadata)

@@ -1,4 +1,5 @@
 """Reader that processes Pandoc Markdown and returns HTML5."""
+import json
 import math
 import os
 import shutil
@@ -13,7 +14,8 @@ from pelican.utils import pelican_open
 
 DIR_PATH = os.path.dirname(__file__)
 TEMPLATES_PATH = os.path.abspath(os.path.join(DIR_PATH, "templates"))
-TOC_TEMPLATE = "toc-template.html"
+TOC_TEMPLATE = "toc.template"
+METADATA_TEMPLATE = "metadata.template"
 DEFAULT_READING_SPEED = 200  # Words per minute
 
 ENCODED_LINKS_TO_RAW_LINKS_MAP = {
@@ -99,9 +101,7 @@ class PandocReader(BaseReader):
             )
 
         # Parse YAML metadata placed in the document's header
-        metadata = self._process_header_metadata(
-            list(content.splitlines()), metadata, pandoc_cmd
-        )
+        metadata = self._process_header_metadata(content, metadata, pandoc_cmd)
 
         return output, metadata
 
@@ -132,8 +132,8 @@ class PandocReader(BaseReader):
             defaults = {}
 
             # Convert YAML data to a Python dictionary
-            with open(default_file) as file_handle:
-                defaults = safe_load(file_handle)
+            with open(default_file, "r") as file_handle:
+                defaults = safe_load(file_handle.read())
 
             self._check_if_unsupported_settings(defaults)
             reader = self._check_input_format(defaults)
@@ -181,16 +181,19 @@ class PandocReader(BaseReader):
 
     def _process_header_metadata(self, content, metadata, pandoc_cmd):
         """Process YAML metadata and export."""
-        # Check that the given text is not empty
-        if not content:
+        # Split content into a list of lines
+        content_lines = list(content.splitlines())
+
+        # Check that the given content is not empty
+        if not content_lines:
             raise Exception("Could not find metadata. File is empty.")
 
-        # Check that the first line of the file starts with a YAML header
-        if content[0].strip() not in ["---", "..."]:
-            raise Exception("Could not find metadata header '...' or '---'.")
+        # Check that the first line of the file starts with a YAML block
+        if content_lines[0].strip() not in ["---"]:
+            raise Exception("Could not find metadata header '---'.")
 
         # Find the end of the YAML block
-        lines = content[1:]
+        lines = content_lines[1:]
         yaml_end = ""
         for line_num, line in enumerate(lines):
             if line.strip() in ["---", "..."]:
@@ -201,18 +204,24 @@ class PandocReader(BaseReader):
         if not yaml_end:
             raise Exception("Could not find end of metadata block.")
 
-        # Process the YAML block
-        for line in lines[:yaml_end]:
-            metalist = line.split(":", 1)
-            if len(metalist) == 2:
-                key, value = (
-                    metalist[0].lower(),
-                    metalist[1].strip().strip('"'),
-                )
-                # Takes care of metadata that should be converted to HTML
-                if key in self.settings["FORMATTED_FIELDS"]:
-                    value = self._run_pandoc(pandoc_cmd, value)
-                metadata[key] = self.process_metadata(key, value)
+        # Set arguments to extract metadata using Pandoc
+        metadata_template_args = [
+            "--template",
+            os.path.join(TEMPLATES_PATH, METADATA_TEMPLATE),
+        ]
+
+        # Extract metadata using Pandoc
+        header_metadata = self._run_pandoc(pandoc_cmd + metadata_template_args, content)
+        header_metadata = json.loads(header_metadata)
+
+        # Cycle through the metadata and process them
+        for key, value in header_metadata.items():
+            key = key.lower()
+            if value and isinstance(value, str):
+                value = value.strip().strip('"')
+
+            # Process the metadata
+            metadata[key] = self.process_metadata(key, value)
         return metadata
 
     @staticmethod
