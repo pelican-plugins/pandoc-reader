@@ -140,7 +140,17 @@ class PandocReader(BaseReader):
             self._check_output_format(defaults)
 
             if not citations:
-                if defaults.get("citeproc", "") and "+citations" in reader:
+                citeproc_specified = False
+
+                # Cases where citeproc is specified as citeproc: true
+                if defaults.get("citeproc", ""):
+                    citeproc_specified = True
+
+                # Cases where citeproc is specified in filters
+                elif "citeproc" in defaults.get("filters", ""):
+                    citeproc_specified = True
+
+                if citeproc_specified and "+citations" in reader:
                     citations = True
 
             if not table_of_contents:
