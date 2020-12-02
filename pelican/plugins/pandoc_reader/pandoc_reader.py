@@ -5,6 +5,7 @@ import os
 import shutil
 import subprocess
 
+import bs4
 from mwc.counter import count_words_in_markdown
 from yaml import safe_load
 
@@ -14,8 +15,7 @@ from pelican.utils import pelican_open
 
 DIR_PATH = os.path.dirname(__file__)
 TEMPLATES_PATH = os.path.abspath(os.path.join(DIR_PATH, "templates"))
-TOC_TEMPLATE = "toc.template"
-METADATA_TEMPLATE = "metadata.template"
+PANDOC_READER_HTML_TEMPLATE = "pandoc-reader-default.html"
 DEFAULT_READING_SPEED = 200  # Words per minute
 
 ENCODED_LINKS_TO_RAW_LINKS_MAP = {
@@ -73,6 +73,9 @@ class PandocReader(BaseReader):
         if isinstance(extensions, list):
             extensions = "".join(extensions)
 
+        # Check if source content has a YAML metadata block
+        self.check_if_yaml_metadata_block(content)
+
         # Check validity of arguments or default files
         table_of_contents, citations = self._validate_fields(
             default_files, arguments, extensions
@@ -88,8 +91,11 @@ class PandocReader(BaseReader):
             for bib_file in self._find_bibs(source_path):
                 pandoc_cmd.append("--bibliography={0}".format(bib_file))
 
-        # Create HTML content
+        # Create HTML content using pandoc-reader-default.html template
         output = self._run_pandoc(pandoc_cmd, content)
+
+        # Extract table of contents, text and metadata from HTML output
+        output, toc, pandoc_metadata = self._extract_contents(output, table_of_contents)
 
         # Replace all occurrences of %7Bstatic%7D to {static},
         # %7Battach%7D to {attach} and %7Bfilename%7D to {filename}
@@ -97,21 +103,18 @@ class PandocReader(BaseReader):
         for encoded_str, raw_str in ENCODED_LINKS_TO_RAW_LINKS_MAP.items():
             output = output.replace(encoded_str, raw_str)
 
-        metadata = {}
+        # Parse Pandoc metadata and add it to Pelican
+        metadata = self._process_metadata(pandoc_metadata)
+
         if table_of_contents:
             # Create table of contents and add to metadata
-            metadata["toc"] = self.process_metadata(
-                "toc", self._create_toc(pandoc_cmd, content)
-            )
+            metadata["toc"] = self.process_metadata("toc", toc)
 
         if self.settings.get("CALCULATE_READING_TIME", []):
             # Calculate reading time and add to metadata
             metadata["reading_time"] = self.process_metadata(
                 "reading_time", self._calculate_reading_time(content)
             )
-
-        # Parse YAML metadata placed in the document's header
-        metadata = self._process_header_metadata(content, metadata, pandoc_cmd)
 
         return output, metadata
 
@@ -169,18 +172,6 @@ class PandocReader(BaseReader):
 
         return citations, table_of_contents
 
-    def _create_toc(self, pandoc_cmd, content):
-        """Generate table of contents."""
-        toc_args = [
-            "--standalone",
-            "--template",
-            os.path.join(TEMPLATES_PATH, TOC_TEMPLATE),
-        ]
-
-        pandoc_cmd = pandoc_cmd + toc_args
-        table_of_contents = self._run_pandoc(pandoc_cmd, content)
-        return table_of_contents
-
     def _calculate_reading_time(self, content):
         """Calculate time taken to read content."""
         reading_speed = self.settings.get("READING_SPEED", DEFAULT_READING_SPEED)
@@ -199,8 +190,23 @@ class PandocReader(BaseReader):
 
         return reading_time
 
-    def _process_header_metadata(self, content, metadata, pandoc_cmd):
-        """Process YAML metadata and export."""
+    def _process_metadata(self, pandoc_metadata):
+        """Process Pandoc metadata and add it to Pelican."""
+
+        # Cycle through the metadata and process them
+        metadata = {}
+        for key, value in pandoc_metadata.items():
+            key = key.lower()
+            if value and isinstance(value, str):
+                value = value.strip().strip('"')
+
+            # Process the metadata
+            metadata[key] = self.process_metadata(key, value)
+        return metadata
+
+    @staticmethod
+    def check_if_yaml_metadata_block(content):
+        """Check if the source content has a YAML metadata block."""
         # Split content into a list of lines
         content_lines = list(content.splitlines())
 
@@ -224,41 +230,20 @@ class PandocReader(BaseReader):
         if not yaml_end:
             raise Exception("Could not find end of metadata block.")
 
-        # Set arguments to extract metadata using Pandoc
-        metadata_template_args = [
-            "--template",
-            os.path.join(TEMPLATES_PATH, METADATA_TEMPLATE),
-        ]
-
-        # Extract metadata using Pandoc
-        header_metadata = self._run_pandoc(pandoc_cmd + metadata_template_args, content)
-        header_metadata = json.loads(header_metadata)
-
-        # Cycle through the metadata and process them
-        for key, value in header_metadata.items():
-            key = key.lower()
-            if value and isinstance(value, str):
-                value = value.strip().strip('"')
-
-            # Process the metadata
-            metadata[key] = self.process_metadata(key, value)
-        return metadata
-
     @staticmethod
     def _construct_pandoc_command(default_files, arguments, extensions):
         """Construct Pandoc command for content."""
-        pandoc_cmd = []
+        pandoc_cmd = [
+            "pandoc",
+            "--standalone",
+            "--template={}".format(
+                os.path.join(TEMPLATES_PATH, PANDOC_READER_HTML_TEMPLATE)
+            ),
+        ]
         if not default_files:
-            pandoc_cmd = [
-                "pandoc",
-                "--from",
-                "markdown" + extensions,
-                "--to",
-                "html5",
-            ]
+            pandoc_cmd.extend(["--from", "markdown" + extensions, "--to", "html5"])
             pandoc_cmd.extend(arguments)
         else:
-            pandoc_cmd = ["pandoc"]
             for default_file in default_files:
                 pandoc_cmd.append("--defaults={0}".format(default_file))
         return pandoc_cmd
@@ -274,6 +259,38 @@ class PandocReader(BaseReader):
             check=True,
         )
         return output.stdout
+
+    @staticmethod
+    def _extract_contents(html_output, table_of_contents):
+        """Extract body html, table of contents and metadata from output."""
+        soup = bs4.BeautifulSoup(html_output, "html.parser")
+
+        # Get table of contents if one was requested
+        toc = ""
+        if table_of_contents:
+            # Extract the table of contents
+            toc = soup.body.find("nav", id="TOC")
+
+            if toc:
+                # Convert it to a string
+                toc = str(toc)
+
+                # Replace id=TOC with class="toc"
+                toc = toc.replace('id="TOC"', 'class="toc"')
+
+                # Remove the table of contents from the HTML output
+                soup.body.find("nav", id="TOC").decompose()
+
+        # Remove body tag around html output
+        soup.body.unwrap()
+
+        # Remove the metadata JSON string at the end of the HTML body
+        body = "".join(str(soup).strip().splitlines()[:-1])
+
+        # Retrieve metadata string and convert to dict
+        pandoc_metadata = json.loads(html_output.splitlines()[-1])
+
+        return body, toc, pandoc_metadata
 
     @staticmethod
     def _check_if_citations(arguments, extensions):

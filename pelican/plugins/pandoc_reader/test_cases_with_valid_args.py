@@ -31,7 +31,7 @@ class TestValidCasesWithArguments(unittest.TestCase):
             (
                 "<p>This is some valid content that should pass."
                 " If it does not pass we"
-                " will know something is wrong.</p>\n"
+                " will know something is wrong.</p>"
             ),
             output,
         )
@@ -52,8 +52,8 @@ class TestValidCasesWithArguments(unittest.TestCase):
 
         self.assertEqual(
             (
-                '<p><span class="math display">\\[\ne^{i\\theta} = '
-                "\\cos\\theta + i \\sin\\theta.\n\\]</span></p>\n"
+                '<p><span class="math display">\\[e^{i\\theta} = '
+                "\\cos\\theta + i \\sin\\theta.\\]</span></p>"
             ),
             output,
         )
@@ -78,13 +78,13 @@ class TestValidCasesWithArguments(unittest.TestCase):
         self.assertEqual(
             (
                 "<p>This is some valid content that should pass."
-                " If it does not pass we will know something is wrong.</p>\n"
+                " If it does not pass we will know something is wrong.</p>"
                 "<p>Our fictitious internal files are available"
-                ' <a href="{filename}/path/to/file">at</a>:</p>\n'
+                ' <a href="{filename}/path/to/file">at</a>:</p>'
                 "<p>Our fictitious static files are available"
-                ' <a href="{static}/path/to/file">at</a>:</p>\n'
+                ' <a href="{static}/path/to/file">at</a>:</p>'
                 "<p>Our fictitious attachments are available"
-                ' <a href="{attach}path/to/file">at</a>:</p>\n'
+                ' <a href="{attach}path/to/file">at</a>:</p>'
             ),
             output,
         )
@@ -111,19 +111,19 @@ class TestValidCasesWithArguments(unittest.TestCase):
         self.assertEqual(
             (
                 "<p>This is some valid content that should pass."
-                " If it does not pass we will know something is wrong.</p>\n"
-                '<h2 id="first-heading">First Heading</h2>\n'
+                " If it does not pass we will know something is wrong.</p>"
+                '<h2 id="first-heading">First Heading</h2>'
                 "<p>This should be the first heading in my"
-                " table of contents.</p>\n"
-                '<h2 id="second-heading">Second Heading</h2>\n'
+                " table of contents.</p>"
+                '<h2 id="second-heading">Second Heading</h2>'
                 "<p>This should be the second heading in my"
-                " table of contents.</p>\n"
-                '<h3 id="first-subheading">First Subheading</h3>\n'
+                " table of contents.</p>"
+                '<h3 id="first-subheading">First Subheading</h3>'
                 "<p>This is a subsection that should be shown as such"
-                " in the table of contents.</p>\n"
-                '<h3 id="second-subheading">Second Subheading</h3>\n'
+                " in the table of contents.</p>"
+                '<h3 id="second-subheading">Second Subheading</h3>'
                 "<p>This is another subsection that should be shown as"
-                " such in the table of contents.</p>\n"
+                " such in the table of contents.</p>"
             ),
             output,
         )
@@ -140,7 +140,7 @@ class TestValidCasesWithArguments(unittest.TestCase):
             '<li><a href="#second-subheading">Second Subheading</a></li>\n'
             "</ul></li>\n"
             "</ul>\n"
-            "</nav>\n",
+            "</nav>",
             str(metadata["toc"]),
         )
 
@@ -161,19 +161,19 @@ class TestValidCasesWithArguments(unittest.TestCase):
         self.assertEqual(
             (
                 "<p>This is some valid content that should pass."
-                " If it does not pass we will know something is wrong.</p>\n"
-                '<h2 id="first-heading">First Heading</h2>\n'
+                " If it does not pass we will know something is wrong.</p>"
+                '<h2 id="first-heading">First Heading</h2>'
                 "<p>This should be the first heading in my"
-                " table of contents.</p>\n"
-                '<h2 id="second-heading">Second Heading</h2>\n'
+                " table of contents.</p>"
+                '<h2 id="second-heading">Second Heading</h2>'
                 "<p>This should be the second heading in my"
-                " table of contents.</p>\n"
-                '<h3 id="first-subheading">First Subheading</h3>\n'
+                " table of contents.</p>"
+                '<h3 id="first-subheading">First Subheading</h3>'
                 "<p>This is a subsection that should be shown as such"
-                " in the table of contents.</p>\n"
-                '<h3 id="second-subheading">Second Subheading</h3>\n'
+                " in the table of contents.</p>"
+                '<h3 id="second-subheading">Second Subheading</h3>'
                 "<p>This is another subsection that should be shown as"
-                " such in the table of contents.</p>\n"
+                " such in the table of contents.</p>"
             ),
             output,
         )
@@ -190,7 +190,7 @@ class TestValidCasesWithArguments(unittest.TestCase):
             '<li><a href="#second-subheading">Second Subheading</a></li>\n'
             "</ul></li>\n"
             "</ul>\n"
-            "</nav>\n",
+            "</nav>",
             str(metadata["toc"]),
         )
 
