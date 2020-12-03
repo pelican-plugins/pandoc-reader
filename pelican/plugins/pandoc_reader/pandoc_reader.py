@@ -263,12 +263,19 @@ class PandocReader(BaseReader):
     @staticmethod
     def _extract_contents(html_output, table_of_contents):
         """Extract body html, table of contents and metadata from output."""
+        # Extract pandoc metadata from html output
+        pandoc_json_metadata, _, html_output = html_output.partition("\n")
+
+        # Convert JSON string to dict
+        pandoc_metadata = json.loads(pandoc_json_metadata)
+
+        # Parse HTML output
         soup = bs4.BeautifulSoup(html_output, "html.parser")
 
-        # Get table of contents if one was requested
+        # Extract the table of contents if one was requested
         toc = ""
         if table_of_contents:
-            # Extract the table of contents
+            # Find the table of contents
             toc = soup.body.find("nav", id="TOC")
 
             if toc:
@@ -284,13 +291,10 @@ class PandocReader(BaseReader):
         # Remove body tag around html output
         soup.body.unwrap()
 
-        # Remove the metadata JSON string at the end of the HTML body
-        body = "".join(str(soup).strip().splitlines()[:-1])
+        # Strip leading and trailing spaces
+        html_output = str(soup).strip()
 
-        # Retrieve metadata string and convert to dict
-        pandoc_metadata = json.loads(html_output.splitlines()[-1])
-
-        return body, toc, pandoc_metadata
+        return html_output, toc, pandoc_metadata
 
     @staticmethod
     def _check_if_citations(arguments, extensions):

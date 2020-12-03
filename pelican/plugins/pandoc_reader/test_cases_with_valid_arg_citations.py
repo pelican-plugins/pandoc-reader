@@ -39,7 +39,7 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
 
         self.assertEqual(
             (
-                '<h2 id="string-theory">String Theory</h2>'
+                '<h2 id="string-theory">String Theory</h2>\n'
                 "<p>But this foundational principle of science has"
                 " now been called into question by"
                 ' <a href="https://www.britannica.com/science/'
@@ -53,12 +53,12 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
                 " notwithstanding, is an issue that is still up for debate"
                 " <span"
                 ' class="citation" data-cites="siegel2015 castelvecchi2016'
-                ' alves2017 francis2019">[4]–[7]</span>.</p>'
-                '<h1 class="unnumbered" id="bibliography">References</h1>'
+                ' alves2017 francis2019">[4]–[7]</span>.</p>\n'
+                '<h1 class="unnumbered" id="bibliography">References</h1>\n'
                 '<div class="references csl-bib-body" id="refs"'
-                ' role="doc-bibliography">'
+                ' role="doc-bibliography">\n'
                 '<div class="csl-entry" id="ref-mann2019"'
-                ' role="doc-biblioentry">'
+                ' role="doc-biblioentry">\n'
                 '<div class="csl-left-margin">[1]'
                 ' </div><div class="csl-right-inline">A. Mann,'
                 " <span>“<span>What Is String Theory?</span>”</span>"
@@ -67,10 +67,10 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
                 '65033-what-is-string-theory.html">'
                 "https://www.livescience.com/"
                 "65033-what-is-string-theory.html</a>."
-                " [Accessed: 12-Nov-2020]</div>"
-                "</div>"
+                " [Accessed: 12-Nov-2020]</div>\n"
+                "</div>\n"
                 '<div class="csl-entry" id="ref-wood2019"'
-                ' role="doc-biblioentry">'
+                ' role="doc-biblioentry">\n'
                 '<div class="csl-left-margin">[2] </div>'
                 '<div class="csl-right-inline">'
                 "C. Wood, <span>“<span>What Is String Theory?</span>."
@@ -80,10 +80,10 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
                 ' [Online]. Available: <a href="https://www.space.com/'
                 '17594-string-theory.html">'
                 "https://www.space.com/17594-string-theory.html</a>."
-                " [Accessed: 12-Nov-2020]</div>"
-                "</div>"
+                " [Accessed: 12-Nov-2020]</div>\n"
+                "</div>\n"
                 '<div class="csl-entry" id="ref-jones2020"'
-                ' role="doc-biblioentry">'
+                ' role="doc-biblioentry">\n'
                 '<div class="csl-left-margin">[3]'
                 ' </div><div class="csl-right-inline">'
                 'A. Z. Jones, <span>“<span class="nocase">The Basics of String'
@@ -91,10 +91,10 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
                 ' <a href="https://www.thoughtco.com/'
                 'what-is-string-theory-2699363">'
                 "https://www.thoughtco.com/what-is-string-theory-2699363</a>."
-                " [Accessed: 12-Nov-2020]</div>"
-                "</div>"
+                " [Accessed: 12-Nov-2020]</div>\n"
+                "</div>\n"
                 '<div class="csl-entry" id="ref-siegel2015"'
-                ' role="doc-biblioentry">'
+                ' role="doc-biblioentry">\n'
                 '<div class="csl-left-margin">[4]'
                 ' </div><div class="csl-right-inline">'
                 "E. Siegel, <span>“<span>Why String Theory Is Not A Scientific"
@@ -105,10 +105,10 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
                 'why-string-theory-is-not-science/">https://www.forbes.com/'
                 "sites/startswithabang/2015/12/23/"
                 "why-string-theory-is-not-science/</a>."
-                " [Accessed: 12-Nov-2020]</div>"
-                "</div>"
+                " [Accessed: 12-Nov-2020]</div>\n"
+                "</div>\n"
                 '<div class="csl-entry" id="ref-castelvecchi2016"'
-                ' role="doc-biblioentry">'
+                ' role="doc-biblioentry">\n'
                 '<div class="csl-left-margin">[5]'
                 ' </div><div class="csl-right-inline">'
                 'D. Castelvecchi, <span>“<span class="nocase">'
@@ -120,10 +120,10 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
                 'feuding-physicists-turn-to-philosophy-for-help-1.19076">'
                 "https://www.nature.com/news/"
                 "feuding-physicists-turn-to-philosophy-for-help-1.19076</a>."
-                " [Accessed: 12-Nov-2020]</div>"
-                "</div>"
+                " [Accessed: 12-Nov-2020]</div>\n"
+                "</div>\n"
                 '<div class="csl-entry" id="ref-alves2017"'
-                ' role="doc-biblioentry">'
+                ' role="doc-biblioentry">\n'
                 '<div class="csl-left-margin">[6] </div>'
                 '<div class="csl-right-inline">'
                 'R. A. Batista and J. Primack, <span>“<span class="nocase">'
@@ -134,10 +134,10 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
                 '30-is-string-theory-falsifiable">'
                 "https://metafact.io/factchecks/"
                 "30-is-string-theory-falsifiable</a>."
-                " [Accessed: 12-Nov-2020]</div>"
-                "</div>"
+                " [Accessed: 12-Nov-2020]</div>\n"
+                "</div>\n"
                 '<div class="csl-entry" id="ref-francis2019"'
-                ' role="doc-biblioentry">'
+                ' role="doc-biblioentry">\n'
                 '<div class="csl-left-margin">[7]'
                 ' </div><div class="csl-right-inline">'
                 'M. R. Francis, <span>“<span class="nocase">Falsifiability and'
@@ -147,8 +147,8 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
                 ' <a href="https://www.scientificamerican.com/'
                 'article/is-string-theory-science/">'
                 "https://www.scientificamerican.com/article/is-"
-                "string-theory-science/</a>. [Accessed: 12-Nov-2020]</div>"
-                "</div>"
+                "string-theory-science/</a>. [Accessed: 12-Nov-2020]</div>\n"
+                "</div>\n"
                 "</div>"
             ),
             output,
@@ -180,7 +180,7 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
 
         self.assertEqual(
             (
-                '<h2 id="string-theory">String Theory</h2>'
+                '<h2 id="string-theory">String Theory</h2>\n'
                 "<p>But this foundational principle of science has"
                 " now been called into question by"
                 ' <a href="https://www.britannica.com/science/'
@@ -194,12 +194,12 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
                 " notwithstanding, is an issue that is still up for debate"
                 " <span"
                 ' class="citation" data-cites="siegel2015 castelvecchi2016'
-                ' alves2017 francis2019">[4]–[7]</span>.</p>'
-                '<h1 class="unnumbered" id="bibliography">References</h1>'
+                ' alves2017 francis2019">[4]–[7]</span>.</p>\n'
+                '<h1 class="unnumbered" id="bibliography">References</h1>\n'
                 '<div class="references csl-bib-body" id="refs"'
-                ' role="doc-bibliography">'
+                ' role="doc-bibliography">\n'
                 '<div class="csl-entry" id="ref-mann2019"'
-                ' role="doc-biblioentry">'
+                ' role="doc-biblioentry">\n'
                 '<div class="csl-left-margin">[1]'
                 ' </div><div class="csl-right-inline">A. Mann,'
                 " <span>“<span>What Is String Theory?</span>”</span>"
@@ -208,10 +208,10 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
                 '65033-what-is-string-theory.html">'
                 "https://www.livescience.com/"
                 "65033-what-is-string-theory.html</a>."
-                " [Accessed: 12-Nov-2020]</div>"
-                "</div>"
+                " [Accessed: 12-Nov-2020]</div>\n"
+                "</div>\n"
                 '<div class="csl-entry" id="ref-wood2019"'
-                ' role="doc-biblioentry">'
+                ' role="doc-biblioentry">\n'
                 '<div class="csl-left-margin">[2] </div>'
                 '<div class="csl-right-inline">'
                 "C. Wood, <span>“<span>What Is String Theory?</span>."
@@ -221,10 +221,10 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
                 ' [Online]. Available: <a href="https://www.space.com/'
                 '17594-string-theory.html">'
                 "https://www.space.com/17594-string-theory.html</a>."
-                " [Accessed: 12-Nov-2020]</div>"
-                "</div>"
+                " [Accessed: 12-Nov-2020]</div>\n"
+                "</div>\n"
                 '<div class="csl-entry" id="ref-jones2020"'
-                ' role="doc-biblioentry">'
+                ' role="doc-biblioentry">\n'
                 '<div class="csl-left-margin">[3]'
                 ' </div><div class="csl-right-inline">'
                 'A. Z. Jones, <span>“<span class="nocase">The Basics of String'
@@ -232,10 +232,10 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
                 ' <a href="https://www.thoughtco.com/'
                 'what-is-string-theory-2699363">'
                 "https://www.thoughtco.com/what-is-string-theory-2699363</a>."
-                " [Accessed: 12-Nov-2020]</div>"
-                "</div>"
+                " [Accessed: 12-Nov-2020]</div>\n"
+                "</div>\n"
                 '<div class="csl-entry" id="ref-siegel2015"'
-                ' role="doc-biblioentry">'
+                ' role="doc-biblioentry">\n'
                 '<div class="csl-left-margin">[4]'
                 ' </div><div class="csl-right-inline">'
                 "E. Siegel, <span>“<span>Why String Theory Is Not A Scientific"
@@ -246,10 +246,10 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
                 'why-string-theory-is-not-science/">https://www.forbes.com/'
                 "sites/startswithabang/2015/12/23/"
                 "why-string-theory-is-not-science/</a>."
-                " [Accessed: 12-Nov-2020]</div>"
-                "</div>"
+                " [Accessed: 12-Nov-2020]</div>\n"
+                "</div>\n"
                 '<div class="csl-entry" id="ref-castelvecchi2016"'
-                ' role="doc-biblioentry">'
+                ' role="doc-biblioentry">\n'
                 '<div class="csl-left-margin">[5]'
                 ' </div><div class="csl-right-inline">'
                 'D. Castelvecchi, <span>“<span class="nocase">'
@@ -261,10 +261,10 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
                 'feuding-physicists-turn-to-philosophy-for-help-1.19076">'
                 "https://www.nature.com/news/"
                 "feuding-physicists-turn-to-philosophy-for-help-1.19076</a>."
-                " [Accessed: 12-Nov-2020]</div>"
-                "</div>"
+                " [Accessed: 12-Nov-2020]</div>\n"
+                "</div>\n"
                 '<div class="csl-entry" id="ref-alves2017"'
-                ' role="doc-biblioentry">'
+                ' role="doc-biblioentry">\n'
                 '<div class="csl-left-margin">[6] </div>'
                 '<div class="csl-right-inline">'
                 'R. A. Batista and J. Primack, <span>“<span class="nocase">'
@@ -275,10 +275,10 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
                 '30-is-string-theory-falsifiable">'
                 "https://metafact.io/factchecks/"
                 "30-is-string-theory-falsifiable</a>."
-                " [Accessed: 12-Nov-2020]</div>"
-                "</div>"
+                " [Accessed: 12-Nov-2020]</div>\n"
+                "</div>\n"
                 '<div class="csl-entry" id="ref-francis2019"'
-                ' role="doc-biblioentry">'
+                ' role="doc-biblioentry">\n'
                 '<div class="csl-left-margin">[7]'
                 ' </div><div class="csl-right-inline">'
                 'M. R. Francis, <span>“<span class="nocase">Falsifiability and'
@@ -288,8 +288,8 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
                 ' <a href="https://www.scientificamerican.com/'
                 'article/is-string-theory-science/">'
                 "https://www.scientificamerican.com/article/is-"
-                "string-theory-science/</a>. [Accessed: 12-Nov-2020]</div>"
-                "</div>"
+                "string-theory-science/</a>. [Accessed: 12-Nov-2020]</div>\n"
+                "</div>\n"
                 "</div>"
             ),
             output,
