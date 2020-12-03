@@ -52,8 +52,9 @@ class TestValidCasesWithArguments(unittest.TestCase):
 
         self.assertEqual(
             (
-                '<p><span class="math display">\\[e^{i\\theta} = '
-                "\\cos\\theta + i \\sin\\theta.\\]</span></p>"
+                '<p><span class="math display">\\[\n'
+                "e^{i\\theta} = \\cos\\theta + i \\sin\\theta.\n"
+                "\\]</span></p>"
             ),
             output,
         )
@@ -78,11 +79,11 @@ class TestValidCasesWithArguments(unittest.TestCase):
         self.assertEqual(
             (
                 "<p>This is some valid content that should pass."
-                " If it does not pass we will know something is wrong.</p>"
+                " If it does not pass we will know something is wrong.</p>\n"
                 "<p>Our fictitious internal files are available"
-                ' <a href="{filename}/path/to/file">at</a>:</p>'
+                ' <a href="{filename}/path/to/file">at</a>:</p>\n'
                 "<p>Our fictitious static files are available"
-                ' <a href="{static}/path/to/file">at</a>:</p>'
+                ' <a href="{static}/path/to/file">at</a>:</p>\n'
                 "<p>Our fictitious attachments are available"
                 ' <a href="{attach}path/to/file">at</a>:</p>'
             ),
@@ -95,7 +96,7 @@ class TestValidCasesWithArguments(unittest.TestCase):
         self.assertEqual("My Author", str(metadata["author"]))
         self.assertEqual("2020-10-16 00:00:00", str(metadata["date"]))
 
-    def test_valid_content_with_toc(self):
+    def test_valid_content_with_toc_1(self):
         """Check if output returned is valid and table of contents is valid."""
         settings = get_settings(
             PANDOC_EXTENSIONS=PANDOC_EXTENSIONS, PANDOC_ARGS=PANDOC_ARGS + ["--toc"],
@@ -111,17 +112,17 @@ class TestValidCasesWithArguments(unittest.TestCase):
         self.assertEqual(
             (
                 "<p>This is some valid content that should pass."
-                " If it does not pass we will know something is wrong.</p>"
-                '<h2 id="first-heading">First Heading</h2>'
+                " If it does not pass we will know something is wrong.</p>\n"
+                '<h2 id="first-heading">First Heading</h2>\n'
                 "<p>This should be the first heading in my"
-                " table of contents.</p>"
-                '<h2 id="second-heading">Second Heading</h2>'
+                " table of contents.</p>\n"
+                '<h2 id="second-heading">Second Heading</h2>\n'
                 "<p>This should be the second heading in my"
-                " table of contents.</p>"
-                '<h3 id="first-subheading">First Subheading</h3>'
+                " table of contents.</p>\n"
+                '<h3 id="first-subheading">First Subheading</h3>\n'
                 "<p>This is a subsection that should be shown as such"
-                " in the table of contents.</p>"
-                '<h3 id="second-subheading">Second Subheading</h3>'
+                " in the table of contents.</p>\n"
+                '<h3 id="second-subheading">Second Subheading</h3>\n'
                 "<p>This is another subsection that should be shown as"
                 " such in the table of contents.</p>"
             ),
@@ -161,17 +162,17 @@ class TestValidCasesWithArguments(unittest.TestCase):
         self.assertEqual(
             (
                 "<p>This is some valid content that should pass."
-                " If it does not pass we will know something is wrong.</p>"
-                '<h2 id="first-heading">First Heading</h2>'
+                " If it does not pass we will know something is wrong.</p>\n"
+                '<h2 id="first-heading">First Heading</h2>\n'
                 "<p>This should be the first heading in my"
-                " table of contents.</p>"
-                '<h2 id="second-heading">Second Heading</h2>'
+                " table of contents.</p>\n"
+                '<h2 id="second-heading">Second Heading</h2>\n'
                 "<p>This should be the second heading in my"
-                " table of contents.</p>"
-                '<h3 id="first-subheading">First Subheading</h3>'
+                " table of contents.</p>\n"
+                '<h3 id="first-subheading">First Subheading</h3>\n'
                 "<p>This is a subsection that should be shown as such"
-                " in the table of contents.</p>"
-                '<h3 id="second-subheading">Second Subheading</h3>'
+                " in the table of contents.</p>\n"
+                '<h3 id="second-subheading">Second Subheading</h3>\n'
                 "<p>This is another subsection that should be shown as"
                 " such in the table of contents.</p>"
             ),
