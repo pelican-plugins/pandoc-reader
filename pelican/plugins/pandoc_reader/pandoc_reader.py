@@ -74,7 +74,7 @@ class PandocReader(BaseReader):
             extensions = "".join(extensions)
 
         # Check if source content has a YAML metadata block
-        self.check_if_yaml_metadata_block(content)
+        self._check_yaml_metadata_block(content)
 
         # Check validity of arguments or default files
         table_of_contents, citations = self._validate_fields(
@@ -205,29 +205,28 @@ class PandocReader(BaseReader):
         return metadata
 
     @staticmethod
-    def check_if_yaml_metadata_block(content):
+    def _check_yaml_metadata_block(content):
         """Check if the source content has a YAML metadata block."""
-        # Split content into a list of lines
-        content_lines = list(content.splitlines())
-
         # Check that the given content is not empty
-        if not content_lines:
+        if not content:
             raise Exception("Could not find metadata. File is empty.")
+
+        # Split content into a list of lines
+        content_lines = content.splitlines()
 
         # Check that the first line of the file starts with a YAML block
         if content_lines[0].strip() not in ["---"]:
             raise Exception("Could not find metadata header '---'.")
 
         # Find the end of the YAML block
-        lines = content_lines[1:]
-        yaml_end = ""
-        for line_num, line in enumerate(lines):
+        yaml_block_end = ""
+        for line_num, line in enumerate(content_lines[1:]):
             if line.strip() in ["---", "..."]:
-                yaml_end = line_num
+                yaml_block_end = line_num
                 break
 
         # Check if the end of the YAML block was found
-        if not yaml_end:
+        if not yaml_block_end:
             raise Exception("Could not find end of metadata block.")
 
     @staticmethod
