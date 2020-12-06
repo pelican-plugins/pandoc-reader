@@ -215,13 +215,13 @@ class PandocReader(BaseReader):
         content_lines = content.splitlines()
 
         # Check that the first line of the file starts with a YAML block
-        if content_lines[0].strip() not in ["---"]:
+        if content_lines[0].rstrip() not in ["---"]:
             raise Exception("Could not find metadata header '---'.")
 
         # Find the end of the YAML block
         yaml_block_end = ""
         for line_num, line in enumerate(content_lines[1:]):
-            if line.strip() in ["---", "..."]:
+            if line.rstrip() in ["---", "..."]:
                 yaml_block_end = line_num
                 break
 
