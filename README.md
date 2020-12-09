@@ -54,6 +54,8 @@ date: "<date>"
 
 > ⚠️ **Note:** The YAML-formatted header shown above is syntax specific to Pandoc for specifying content metadata. This is different from Pelican’s front-matter format. If you ever decide to stop using this plugin and switch to Pelican’s default Markdown handling, you may need to switch your front-matter metadata to [Python-Markdown’s Meta-Data format](https://python-markdown.github.io/extensions/meta_data/).
 
+If you have files that use Pelican's front matter format there is a script written by [Joseph Reagle](https://github.com/reagle) that converts Pelican's front matter to Pandoc's YAML header available [here](https://gist.github.com/reagle/5bc44ba9e2f1b961d1aaca9179fb403b).
+
 For more information on Pandoc's YAML metadata block or Pelican's default metadata format please visit the links below:
 
 * [Pandoc’s YAML metadata blocks](https://pandoc.org/MANUAL.html#metadata-blocks)
@@ -142,7 +144,7 @@ The table of contents will be available for use in templates using the `{{ artic
 
 ### Enabling Citations
 
-You may enable citations by specifying the `citations` extension and the `-C` or `--citeproc` option.
+You may enable citations by specifying the `-C` or `--citeproc` option.
 
 Set the `PANDOC_ARGS` and `PANDOC_EXTENSIONS` in your Pelican settings file as shown below:
 
@@ -160,24 +162,18 @@ PANDOC_ARGS = [
 ]
 ```
 
-… and …
-
-```python
-PANDOC_EXTENSIONS = [
-    "+citations",
-]
-```
-
 If you are using a Pandoc default file, you need the following as a bare minimum to enable citations:
 
 ```yaml
-reader: markdown+citations
+reader: markdown
 writer: html5
 
 citeproc: true
 ```
 
 Without these settings, citations will not be processed by the plugin.
+
+It is not necessary to specify the `+citations` extension since it is enabled by default. However, if you were to disable citations by specifying `-citations` in `PANDOC_EXTENSIONS` or by setting `reader: markdown-citations` in your default file citations will **not** work.
 
 You may write your bibliography in any format supported by Pandoc with the appropriate extensions specified. However, you **must** name the bibliography file the same as your post.
 
@@ -242,6 +238,8 @@ Contributions are welcome and much appreciated. Every little bit helps. You can 
 
 To start contributing to this plugin, review the [Contributing to Pelican][] documentation, beginning with the **Contributing Code** section.
 
+Special thanks to [Justin Mayer](https://github.com/justinmayer), [Erwin Janssen](https://github.com/ErwinJanssen), [Joseph Reagle](https://github.com/reagle) and [Deniz Turgut](https://github.com/avaris) for their improvements and feedback on this plugin.
+
 [existing issues]: https://github.com/pelican-plugins/pandoc-reader/issues
 [Contributing to Pelican]: https://docs.getpelican.com/en/latest/contribute.html
 
@@ -249,7 +247,6 @@ License
 -------
 
 This project is licensed under the AGPL-3.0 license.
-
 
 [Pelican]: https://getpelican.com
 [Pandoc’s variant of Markdown]: https://pandoc.org/MANUAL.html#pandocs-markdown

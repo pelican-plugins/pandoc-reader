@@ -2,7 +2,7 @@
 #
 # A test default file that sets writer to an invalid output format
 #
-reader: markdown+smart+citations+implicit_figures
+reader: markdown+smart
 writer: myoutputformat
 
 html-math-method:

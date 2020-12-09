@@ -2,7 +2,7 @@
 #
 # A test default file that is valid
 #
-reader: markdown+smart+citations+implicit_figures
+reader: markdown+smart
 writer: html5
 
 html-math-method:

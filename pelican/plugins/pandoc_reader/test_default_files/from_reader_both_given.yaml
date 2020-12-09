@@ -2,8 +2,8 @@
 #
 # A test default file that sets both reader and from
 #
-reader: markdown+smart+citations+implicit_figures
-from: markdown+smart+citations+implicit_figures
+reader: markdown+smart
+from: markdown+smart
 writer: html5
 
 html-math-method:

@@ -11,7 +11,7 @@ TEST_CONTENT_PATH = os.path.abspath(os.path.join(DIR_PATH, "test_content"))
 
 # Test settings that will be set in pelicanconf.py by plugin users
 PANDOC_ARGS = ["--mathjax"]
-PANDOC_EXTENSIONS = ["+smart", "+implicit_figures"]
+PANDOC_EXTENSIONS = ["+smart"]
 
 
 class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
@@ -20,7 +20,7 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
     def test_citations_1(self):
         """Check if output and citations through -C argument is valid."""
         settings = get_settings(
-            PANDOC_EXTENSIONS=PANDOC_EXTENSIONS + ["+citations"],
+            PANDOC_EXTENSIONS=PANDOC_EXTENSIONS,
             PANDOC_ARGS=PANDOC_ARGS
             + [
                 "-C",
@@ -161,7 +161,7 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
     def test_citations_2(self):
         """Check if output and citations through --citeproc argument is valid."""
         settings = get_settings(
-            PANDOC_EXTENSIONS=PANDOC_EXTENSIONS + ["+citations"],
+            PANDOC_EXTENSIONS=PANDOC_EXTENSIONS,
             PANDOC_ARGS=PANDOC_ARGS
             + [
                 "--citeproc",

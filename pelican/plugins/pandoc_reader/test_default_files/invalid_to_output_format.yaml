@@ -2,7 +2,7 @@
 #
 # A test default file that sets to an invalid output format
 #
-from: markdown+smart+citations+implicit_figures
+from: markdown+smart
 to: myoutputformat
 
 html-math-method:
