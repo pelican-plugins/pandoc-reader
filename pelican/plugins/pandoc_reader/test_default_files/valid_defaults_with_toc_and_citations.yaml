@@ -2,7 +2,7 @@
 #
 # A test default file that is valid and sets table_of_contents to true and enables citations
 #
-reader: markdown+smart+citations+implicit_figures
+reader: markdown+smart
 writer: html5
 
 table-of-contents: true

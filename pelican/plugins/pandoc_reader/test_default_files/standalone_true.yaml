@@ -2,7 +2,7 @@
 #
 # A test default file that sets standalone to true
 #
-reader: markdown+smart+citations+implicit_figures
+reader: markdown+smart
 writer: html5
 standalone: true
 

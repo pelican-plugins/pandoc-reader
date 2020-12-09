@@ -12,7 +12,7 @@ TEST_CONTENT_PATH = os.path.abspath(os.path.join(DIR_PATH, "test_content"))
 
 # Test settings that will be set in pelicanconf.py by plugin users
 PANDOC_ARGS = ["--mathjax"]
-PANDOC_EXTENSIONS = ["+smart", "+implicit_figures"]
+PANDOC_EXTENSIONS = ["+smart"]
 
 
 class TestPandocAvailability(unittest.TestCase):

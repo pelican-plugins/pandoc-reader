@@ -163,7 +163,9 @@ class PandocReader(BaseReader):
                 elif "citeproc" in defaults.get("filters", ""):
                     citeproc_specified = True
 
-                if citeproc_specified and "+citations" in reader:
+                # The extension +citations is enabled by default in Pandoc 2.11
+                # are checking that the extension is not disabled using -citations
+                if citeproc_specified and "-citations" not in reader:
                     citations = True
 
             if not table_of_contents:
@@ -300,9 +302,11 @@ class PandocReader(BaseReader):
         """Check if citations are specified."""
         citations = False
         if arguments and extensions:
+            # The +citations extension is enabled by default in Pandoc 2.11
+            # therefore we do a check to see that it is not disabled in extensions
             if (
                 "--citeproc" in arguments or "-C" in arguments
-            ) and "+citations" in extensions:
+            ) and "-citations" not in extensions:
                 citations = True
         return citations
 

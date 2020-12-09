@@ -2,7 +2,7 @@
 #
 # A test default file that sets both reader and from
 #
-reader: markdown+smart+citations+implicit_figures
+reader: markdown+smart
 to: html5
 writer: html5
 
