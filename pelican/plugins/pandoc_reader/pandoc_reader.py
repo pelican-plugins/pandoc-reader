@@ -38,7 +38,10 @@ VALID_INPUT_FORMATS = (
 VALID_OUTPUT_FORMATS = ("html", "html5")
 UNSUPPORTED_ARGUMENTS = ("--standalone", "--self-contained")
 VALID_BIB_EXTENSIONS = ["json", "yaml", "bibtex", "bib"]
-FILE_EXTENSIONS = ["md", "markdown", "mkd", "mdown"]
+FILE_EXTENSIONS = ["md", "mkd", "mkdn", "mdwn", "mdown", "markdown", "Rmd"]
+DEFAULT_PANDOC_EXECUTABLE = "pandoc"
+PANDOC_SUPPORTED_MAJOR_VERSION = 2
+PANDOC_SUPPORTED_MINOR_VERSION = 11
 
 
 class PandocReader(BaseReader):
@@ -49,9 +52,21 @@ class PandocReader(BaseReader):
 
     def read(self, source_path):
         """Parse Pandoc Markdown and return HTML5 markup and metadata."""
+        # Get the user-defined path to the Pandoc executable or fall back to default
+        pandoc_executable = self.settings.get(
+            "PANDOC_EXECUTABLE_PATH", DEFAULT_PANDOC_EXECUTABLE
+        )
+
+        # If user-defined path, expand and make it absolute in case the path is relative
+        if pandoc_executable != DEFAULT_PANDOC_EXECUTABLE:
+            pandoc_executable = os.path.abspath(os.path.expanduser(pandoc_executable))
+
         # Check if pandoc is installed and is executable
-        if not shutil.which("pandoc"):
+        if not shutil.which(pandoc_executable):
             raise Exception("Could not find Pandoc. Please install.")
+
+        # Check if the version of pandoc installed is 2.11 or higher
+        self._check_pandoc_version(pandoc_executable)
 
         # Open Markdown file and read content
         content = ""
@@ -59,11 +74,11 @@ class PandocReader(BaseReader):
             content = file_content
 
         # Retrieve HTML content and metadata
-        output, metadata = self._create_html(source_path, content)
+        output, metadata = self._create_html(source_path, content, pandoc_executable)
 
         return output, metadata
 
-    def _create_html(self, source_path, content):
+    def _create_html(self, source_path, content, pandoc_executable):
         """Create HTML5 content."""
         # Get settings set in pelicanconf.py
         default_files = self.settings.get("PANDOC_DEFAULT_FILES", [])
@@ -83,7 +98,7 @@ class PandocReader(BaseReader):
 
         # Construct preliminary pandoc command
         pandoc_cmd = self._construct_pandoc_command(
-            default_files, arguments, extensions
+            pandoc_executable, default_files, arguments, extensions
         )
 
         # Find and add bibliography if citations are specified
@@ -194,7 +209,6 @@ class PandocReader(BaseReader):
 
     def _process_metadata(self, pandoc_metadata):
         """Process Pandoc metadata and add it to Pelican."""
-
         # Cycle through the metadata and process them
         metadata = {}
         for key, value in pandoc_metadata.items():
@@ -205,6 +219,34 @@ class PandocReader(BaseReader):
             # Process the metadata
             metadata[key] = self.process_metadata(key, value)
         return metadata
+
+    @staticmethod
+    def _check_pandoc_version(pandoc_executable):
+        """Check that the specified version of Pandoc is 2.11 or higher."""
+        output = subprocess.run(
+            [pandoc_executable, "--version"],
+            capture_output=True,
+            encoding="utf-8",
+            check=True,
+        )
+
+        # Returns a string of the form pandoc <version>
+        pandoc_version = output.stdout.split("\n")[0]
+
+        # Get the major and minor version from the above version string
+        major_version = pandoc_version.split()[1].split(".")[0]
+        minor_version = pandoc_version.split()[1].split(".")[1]
+
+        # Pandoc major version less than 2 are not supported
+        if int(major_version) < PANDOC_SUPPORTED_MAJOR_VERSION:
+            raise Exception("Pandoc version must be 2.11 or higher.")
+
+        # Pandoc major version 2 minor version less than 11 are not supported
+        if (
+            int(major_version) == PANDOC_SUPPORTED_MAJOR_VERSION
+            and int(minor_version) < PANDOC_SUPPORTED_MINOR_VERSION
+        ):
+            raise Exception("Pandoc version must be 2.11 or higher.")
 
     @staticmethod
     def _check_yaml_metadata_block(content):
@@ -232,10 +274,12 @@ class PandocReader(BaseReader):
             raise Exception("Could not find end of metadata block.")
 
     @staticmethod
-    def _construct_pandoc_command(default_files, arguments, extensions):
+    def _construct_pandoc_command(
+        pandoc_executable, default_files, arguments, extensions
+    ):
         """Construct Pandoc command for content."""
         pandoc_cmd = [
-            "pandoc",
+            pandoc_executable,
             "--standalone",
             "--template={}".format(
                 os.path.join(TEMPLATES_PATH, PANDOC_READER_HTML_TEMPLATE)

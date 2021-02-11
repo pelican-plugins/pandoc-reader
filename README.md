@@ -10,9 +10,12 @@ Pandoc Reader is a [Pelican][] plugin that converts documents written in [Pandoc
 Requirements
 ------------
 
-This plugin requires a `pandoc` executable to be available on your `PATH`. We recommend using the latest version of Pandoc (2.11 and higher), as earlier versions are not supported.
+This plugin requires:
 
-To install this needed dependency, follow the [Pandoc installation instructions](https://pandoc.org/installing.html).
+* Python 3.7 or higher; and
+* Pandoc 2.11 or higher [[Pandoc installation instructions](https://pandoc.org/installing.html)].
+
+By default, the plugin looks for a `pandoc` executable on your `PATH`. If you wish, [you can specify an alternative location for your `pandoc` executable](#customizing-path-for-pandoc-executable).
 
 Installation
 ------------
@@ -230,6 +233,16 @@ READING_SPEED = <words-per-minute>
 ```
 
 The number of words in a document is calculated using the [Markdown Word Count](https://github.com/gandreadis/markdown-word-count) package.
+
+### Customizing Path for `pandoc` Executable
+
+If your `pandoc` executable does not reside on your `PATH`, set the `PANDOC_EXECUTABLE_PATH` in your Pelican settings file to the absolute path of where your `pandoc` resides as shown below:
+
+```python
+PANDOC_EXECUTABLE_PATH = /path/to/my/pandoc
+```
+
+This setting is useful in cases where the `pandoc` executable from your hosting provider is not recent enough, and you may need to install a version of Pandoc—compatible with this plugin—in a non-standard location.
 
 Contributing
 ------------
