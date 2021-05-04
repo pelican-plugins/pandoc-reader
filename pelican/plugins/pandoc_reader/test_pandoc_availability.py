@@ -21,7 +21,8 @@ class TestPandocAvailability(unittest.TestCase):
     def test_pandoc_availability_one(self):
         """Check if Pandoc executable is available."""
         settings = get_settings(
-            PANDOC_EXTENSIONS=PANDOC_EXTENSIONS, PANDOC_ARGS=PANDOC_ARGS,
+            PANDOC_EXTENSIONS=PANDOC_EXTENSIONS,
+            PANDOC_ARGS=PANDOC_ARGS,
         )
 
         pandoc_reader = PandocReader(settings)

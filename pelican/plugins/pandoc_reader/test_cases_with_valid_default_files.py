@@ -119,11 +119,14 @@ class TestValidCasesWithDefaultFiles(unittest.TestCase):
         """Check if output, citations and table of contents are valid."""
         pandoc_default_files = [
             os.path.join(
-                TEST_DEFAULT_FILES_PATH, "valid_defaults_with_toc_and_citations.yaml",
+                TEST_DEFAULT_FILES_PATH,
+                "valid_defaults_with_toc_and_citations.yaml",
             )
         ]
 
-        settings = get_settings(PANDOC_DEFAULT_FILES=pandoc_default_files,)
+        settings = get_settings(
+            PANDOC_DEFAULT_FILES=pandoc_default_files,
+        )
         pandoc_reader = PandocReader(settings)
 
         source_path = os.path.join(TEST_CONTENT_PATH, "valid_content_with_citation.md")
@@ -265,11 +268,14 @@ class TestValidCasesWithDefaultFiles(unittest.TestCase):
         """Check if output, citations are valid using citeproc filter."""
         pandoc_default_files = [
             os.path.join(
-                TEST_DEFAULT_FILES_PATH, "valid_defaults_with_citeproc_filter.yaml",
+                TEST_DEFAULT_FILES_PATH,
+                "valid_defaults_with_citeproc_filter.yaml",
             )
         ]
 
-        settings = get_settings(PANDOC_DEFAULT_FILES=pandoc_default_files,)
+        settings = get_settings(
+            PANDOC_DEFAULT_FILES=pandoc_default_files,
+        )
         pandoc_reader = PandocReader(settings)
 
         source_path = os.path.join(TEST_CONTENT_PATH, "valid_content_with_citation.md")

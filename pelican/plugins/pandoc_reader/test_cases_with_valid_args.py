@@ -99,7 +99,8 @@ class TestValidCasesWithArguments(unittest.TestCase):
     def test_valid_content_with_toc_1(self):
         """Check if output returned is valid and table of contents is valid."""
         settings = get_settings(
-            PANDOC_EXTENSIONS=PANDOC_EXTENSIONS, PANDOC_ARGS=PANDOC_ARGS + ["--toc"],
+            PANDOC_EXTENSIONS=PANDOC_EXTENSIONS,
+            PANDOC_ARGS=PANDOC_ARGS + ["--toc"],
         )
 
         pandoc_reader = PandocReader(settings)
