@@ -13,16 +13,22 @@ from pelican import signals
 from pelican.readers import BaseReader
 from pelican.utils import pelican_open
 
-DIR_PATH = os.path.dirname(__file__)
-TEMPLATES_PATH = os.path.abspath(os.path.join(DIR_PATH, "templates"))
-PANDOC_READER_HTML_TEMPLATE = "pandoc-reader-default.html"
 DEFAULT_READING_SPEED = 200  # Words per minute
-
+DEFAULT_PANDOC_EXECUTABLE = "pandoc"
+DIR_PATH = os.path.dirname(__file__)
 ENCODED_LINKS_TO_RAW_LINKS_MAP = {
     "%7Bstatic%7D": "{static}",
     "%7Battach%7D": "{attach}",
     "%7Bfilename%7D": "{filename}",
 }
+FILE_EXTENSIONS = ["md", "mkd", "mkdn", "mdwn", "mdown", "markdown", "Rmd"]
+PANDOC_READER_HTML_TEMPLATE = "pandoc-reader-default.html"
+PANDOC_SUPPORTED_MAJOR_VERSION = 2
+PANDOC_SUPPORTED_MINOR_VERSION = 11
+
+TEMPLATES_PATH = os.path.abspath(os.path.join(DIR_PATH, "templates"))
+UNSUPPORTED_ARGUMENTS = ("--standalone", "--self-contained")
+VALID_BIB_EXTENSIONS = ["json", "yaml", "bibtex", "bib"]
 
 # Markdown variants supported in default files
 # Update as Pandoc adds or removes support for formats
@@ -36,12 +42,6 @@ VALID_INPUT_FORMATS = (
     "markdown_strict",
 )
 VALID_OUTPUT_FORMATS = ("html", "html5")
-UNSUPPORTED_ARGUMENTS = ("--standalone", "--self-contained")
-VALID_BIB_EXTENSIONS = ["json", "yaml", "bibtex", "bib"]
-FILE_EXTENSIONS = ["md", "mkd", "mkdn", "mdwn", "mdown", "markdown", "Rmd"]
-DEFAULT_PANDOC_EXECUTABLE = "pandoc"
-PANDOC_SUPPORTED_MAJOR_VERSION = 2
-PANDOC_SUPPORTED_MINOR_VERSION = 11
 
 
 class PandocReader(BaseReader):
@@ -291,6 +291,10 @@ class PandocReader(BaseReader):
         else:
             for default_file in default_files:
                 pandoc_cmd.append("--defaults={0}".format(default_file))
+
+        # Appending --wrap=None so that rendered HTML5 does not have new lines (\n)
+        # See https://pandoc.org/MANUAL.html#general-writer-options --wrap
+        pandoc_cmd.append("--wrap=none")
         return pandoc_cmd
 
     @staticmethod
