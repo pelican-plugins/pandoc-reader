@@ -8,6 +8,7 @@ from pandoc_reader import PandocReader
 
 DIR_PATH = os.path.dirname(__file__)
 TEST_CONTENT_PATH = os.path.abspath(os.path.join(DIR_PATH, "test_content"))
+TEST_DEFAULT_FILES_PATH = os.path.abspath(os.path.join(DIR_PATH, "test_default_files"))
 
 # Test settings that will be set in pelicanconf.py by plugin users
 PANDOC_ARGS = ["--mathjax"]
@@ -174,6 +175,62 @@ class TestValidCaseWithArgumentsAndCitations(unittest.TestCase):
         output, metadata = pandoc_reader.read(source_path)
 
         # Setting this so that assert is able to execute the difference
+        self.maxDiff = None  # pylint: disable=invalid-name
+
+        self.assertEqual(HTML_CITATION_TEXT, output)
+        self.assertEqual("Valid Content With Citation", str(metadata["title"]))
+        self.assertEqual("My Author", str(metadata["author"]))
+        self.assertEqual("2020-10-16 00:00:00", str(metadata["date"]))
+
+    def test_citations_and_toc_with_valid_defaults(self):
+        """Check if output, citations and table of contents are valid."""
+        pandoc_default_files = [
+            os.path.join(
+                TEST_DEFAULT_FILES_PATH,
+                "valid_defaults_with_toc_and_citations.yaml",
+            )
+        ]
+
+        settings = get_settings(
+            PANDOC_DEFAULT_FILES=pandoc_default_files,
+        )
+        pandoc_reader = PandocReader(settings)
+
+        source_path = os.path.join(TEST_CONTENT_PATH, "valid_content_with_citation.md")
+        output, metadata = pandoc_reader.read(source_path)
+        self.maxDiff = None  # pylint: disable=invalid-name
+
+        self.assertEqual(HTML_CITATION_TEXT, output)
+        self.assertEqual("Valid Content With Citation", str(metadata["title"]))
+        self.assertEqual("My Author", str(metadata["author"]))
+        self.assertEqual("2020-10-16 00:00:00", str(metadata["date"]))
+        self.assertEqual(
+            (
+                '<nav class="toc" role="doc-toc">\n'
+                "<ul>\n"
+                '<li><a href="#string-theory">String Theory</a></li>\n'
+                '<li><a href="#bibliography">References</a></li>\n'
+                "</ul>\n</nav>"
+            ),
+            str(metadata["toc"]),
+        )
+
+    def test_citations_and_with_citeproc_filter(self):
+        """Check if output, citations are valid using citeproc filter."""
+        pandoc_default_files = [
+            os.path.join(
+                TEST_DEFAULT_FILES_PATH,
+                "valid_defaults_with_citeproc_filter.yaml",
+            )
+        ]
+
+        settings = get_settings(
+            PANDOC_DEFAULT_FILES=pandoc_default_files,
+        )
+        pandoc_reader = PandocReader(settings)
+
+        source_path = os.path.join(TEST_CONTENT_PATH, "valid_content_with_citation.md")
+        output, metadata = pandoc_reader.read(source_path)
         self.maxDiff = None  # pylint: disable=invalid-name
 
         self.assertEqual(HTML_CITATION_TEXT, output)
