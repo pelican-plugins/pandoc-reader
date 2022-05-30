@@ -1,9 +1,10 @@
-# invalid_reader_input_format.yaml
+# valid_defaults.yaaml
 #
-# A test default file that sets reader to an invalid input format
+# A defaults file that is valid.
 #
-reader: myinputformat
+reader: markdown+smart
 writer: html5
+wrap: none
 
 html-math-method:
   method: mathjax

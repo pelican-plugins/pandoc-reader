@@ -1,0 +1,9 @@
+# valid_first_defaults_file_writer.yaml
+#
+# A defaults file that sets the writer attribute and is used with the
+# valid_second_defaults_file_writer.yaml that sets the to attribute. Taken together
+# the defaults are invalid as you cannot specify writer and to.
+#
+reader: markdown+smart
+writer: html5
+wrap: none

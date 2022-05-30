@@ -1,6 +1,6 @@
 # invalid_writer_output_format.yaml
 #
-# A test default file that sets writer to an invalid output format
+# A defaults file that sets the writer attribute to an invalid output format.
 #
 reader: markdown+smart
 writer: myoutputformat

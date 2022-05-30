@@ -1,10 +1,12 @@
-# from_reader_both_given.yaml
+# valid_defaults_with_toc.yaml
 #
-# A test default file that sets both reader and from
+# A defaults file that is valid and sets table-of-contents to true.
 #
 reader: markdown+smart
-from: markdown+smart
 writer: html5
+wrap: none
+
+table-of-contents: true
 
 html-math-method:
   method: mathjax

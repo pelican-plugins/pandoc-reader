@@ -1,11 +1,10 @@
-# valid_defaults_with_toc.yml
+# self_contained_true.yaml
 #
-# A test default file that is valid and sets table_of_contents to true
+# A defaults file that sets self-contained to true which is invalid.
 #
 reader: markdown+smart
 writer: html5
-
-table-of-contents: true
+self-contained: true
 
 html-math-method:
   method: mathjax

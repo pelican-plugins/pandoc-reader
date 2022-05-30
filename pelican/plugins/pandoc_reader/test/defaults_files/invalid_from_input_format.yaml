@@ -1,6 +1,6 @@
 # invalid_from_input_format.yaml
 #
-# A test default file that sets from to an invalid input format
+# A defaults file that sets the from attribute to an invalid input format.
 #
 from: myinputformat
 to: html5

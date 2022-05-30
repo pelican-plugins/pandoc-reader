@@ -1,0 +1,7 @@
+# valid_second_defaults_file_writer.yaml
+#
+# A defaults file that sets the to attribute and is used with the
+# valid_first_defaults_file_writer.yaml that sets the writer attribute. Taken together
+# the defaults are invalid as you cannot specify writer and to.
+#
+to: html5

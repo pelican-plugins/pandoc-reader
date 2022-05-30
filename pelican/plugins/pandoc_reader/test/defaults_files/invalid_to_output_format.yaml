@@ -1,6 +1,6 @@
 # invalid_to_output_format.yaml
 #
-# A test default file that sets to an invalid output format
+# A defaults file that sets the to attribute to an invalid output format.
 #
 from: markdown+smart
 to: myoutputformat

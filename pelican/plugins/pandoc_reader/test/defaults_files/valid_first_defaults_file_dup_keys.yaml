@@ -1,0 +1,14 @@
+# valid_first_defaults_file_dup_keys.yaml
+#
+# A defaults file that is valid and is used together with
+# valid_second_defaults_file_dup_keys.yaml. Taken together the defaults are
+# invalid as they specify the same keys and can cause unexpected output
+# if not caught
+#
+reader: markdown+smart
+writer: html5
+wrap: none
+
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"

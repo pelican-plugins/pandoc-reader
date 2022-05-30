@@ -1,0 +1,8 @@
+# valid_defaults_file_1.yaml
+#
+# A defaults file that specifies reader and writer formats and is
+# used together with valid_defaults_file_2.yaml to test the valid
+# multiple defaults file case.
+#
+reader: markdown+smart
+writer: html5

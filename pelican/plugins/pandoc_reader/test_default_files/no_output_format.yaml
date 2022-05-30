@@ -1,9 +1,0 @@
-# no_output_format.yaml
-#
-# A test default file that specifies no output format
-#
-reader: markdown
-
-html-math-method:
-  method: mathjax
-  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
