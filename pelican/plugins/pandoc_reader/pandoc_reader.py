@@ -7,7 +7,7 @@ import subprocess
 
 import bs4
 from mwc.counter import count_words_in_markdown
-from yaml import safe_load
+from ruamel.yaml import YAML, constructor
 
 from pelican import signals
 from pelican.readers import BaseReader
@@ -30,7 +30,7 @@ TEMPLATES_PATH = os.path.abspath(os.path.join(DIR_PATH, "templates"))
 UNSUPPORTED_ARGUMENTS = ("--standalone", "--self-contained")
 VALID_BIB_EXTENSIONS = ["json", "yaml", "bibtex", "bib"]
 
-# Markdown variants supported in default files
+# Markdown variants supported in defaults files
 # Update as Pandoc adds or removes support for formats
 VALID_INPUT_FORMATS = (
     "commonmark",
@@ -81,7 +81,7 @@ class PandocReader(BaseReader):
     def _create_html(self, source_path, content, pandoc_executable):
         """Create HTML5 content."""
         # Get settings set in pelicanconf.py
-        default_files = self.settings.get("PANDOC_DEFAULT_FILES", [])
+        defaults_files = self.settings.get("PANDOC_DEFAULTS_FILES", [])
         arguments = self.settings.get("PANDOC_ARGS", [])
         extensions = self.settings.get("PANDOC_EXTENSIONS", [])
 
@@ -91,14 +91,14 @@ class PandocReader(BaseReader):
         # Check if source content has a YAML metadata block
         self._check_yaml_metadata_block(content)
 
-        # Check validity of arguments or default files
+        # Check validity of arguments or defaults files
         table_of_contents, citations = self._validate_fields(
-            default_files, arguments, extensions
+            defaults_files, arguments, extensions
         )
 
         # Construct preliminary pandoc command
         pandoc_cmd = self._construct_pandoc_command(
-            pandoc_executable, default_files, arguments, extensions
+            pandoc_executable, defaults_files, arguments, extensions
         )
 
         # Find and add bibliography if citations are specified
@@ -133,10 +133,10 @@ class PandocReader(BaseReader):
 
         return output, metadata
 
-    def _validate_fields(self, default_files, arguments, extensions):
+    def _validate_fields(self, defaults_files, arguments, extensions):
         """Validate fields and return citations and ToC request values."""
-        # If default_files is empty then validate the argument and extensions
-        if not default_files:
+        # If defaults_files is empty then validate the argument and extensions
+        if not defaults_files:
             # Validate the arguments to see that they are supported
             # by the plugin
             self._check_arguments(arguments)
@@ -147,45 +147,56 @@ class PandocReader(BaseReader):
             # Check if table of contents has been requested
             table_of_contents = self._check_if_toc(arguments)
         else:
-            # Validate default files and get the citations
+            # Validate defaults files and get the citations
             # abd table of contents request value
-            citations, table_of_contents = self._check_defaults(default_files)
+            citations, table_of_contents = self._check_defaults(defaults_files)
         return table_of_contents, citations
 
-    def _check_defaults(self, default_files):
+    def _check_defaults(self, defaults_files):
         """Check if the given Pandoc defaults file has valid values."""
         citations = False
         table_of_contents = False
-        for default_file in default_files:
-            defaults = {}
 
-            # Convert YAML data to a Python dictionary
-            with open(default_file, "r") as file_handle:
-                defaults = safe_load(file_handle.read())
+        # Get the data in all defaults files as a string
+        defaults_data = ""
+        for defaults_file in defaults_files:
+            with open(defaults_file, "r") as file_handle:
+                for line in file_handle.readlines():
+                    defaults_data += line
 
-            self._check_if_unsupported_settings(defaults)
-            reader = self._check_input_format(defaults)
-            self._check_output_format(defaults)
+        # Convert YAML data to a Python dictionary
+        defaults = {}
+        try:
+            yaml = YAML()
+            defaults = yaml.load(defaults_data)
+        except constructor.DuplicateKeyError as duplicate_key_error:
+            raise ValueError(
+                "Duplicate keys defined in multiple defaults files."
+            ) from duplicate_key_error
 
-            if not citations:
-                citeproc_specified = False
+        self._check_if_unsupported_settings(defaults)
+        reader = self._check_input_format(defaults)
+        self._check_output_format(defaults)
 
-                # Cases where citeproc is specified as citeproc: true
-                if defaults.get("citeproc", ""):
-                    citeproc_specified = True
+        if not citations:
+            citeproc_specified = False
 
-                # Cases where citeproc is specified in filters
-                elif "citeproc" in defaults.get("filters", ""):
-                    citeproc_specified = True
+            # Cases where citeproc is specified as citeproc: true
+            if defaults.get("citeproc", ""):
+                citeproc_specified = True
 
-                # The extension +citations is enabled by default in Pandoc 2.11
-                # are checking that the extension is not disabled using -citations
-                if citeproc_specified and "-citations" not in reader:
-                    citations = True
+            # Cases where citeproc is specified in filters
+            elif "citeproc" in defaults.get("filters", ""):
+                citeproc_specified = True
 
-            if not table_of_contents:
-                if defaults.get("table-of-contents", ""):
-                    table_of_contents = True
+            # The extension +citations is enabled by default in Pandoc 2.11
+            # we are checking that the extension is not disabled using -citations
+            if citeproc_specified and "-citations" not in reader:
+                citations = True
+
+        if not table_of_contents:
+            if defaults.get("table-of-contents", ""):
+                table_of_contents = True
 
         return citations, table_of_contents
 
@@ -275,7 +286,7 @@ class PandocReader(BaseReader):
 
     @staticmethod
     def _construct_pandoc_command(
-        pandoc_executable, default_files, arguments, extensions
+        pandoc_executable, defaults_files, arguments, extensions
     ):
         """Construct Pandoc command for content."""
         pandoc_cmd = [
@@ -285,16 +296,12 @@ class PandocReader(BaseReader):
                 os.path.join(TEMPLATES_PATH, PANDOC_READER_HTML_TEMPLATE)
             ),
         ]
-        if not default_files:
+        if not defaults_files:
             pandoc_cmd.extend(["--from", "markdown" + extensions, "--to", "html5"])
             pandoc_cmd.extend(arguments)
         else:
-            for default_file in default_files:
-                pandoc_cmd.append("--defaults={0}".format(default_file))
-
-        # Appending --wrap=None so that rendered HTML5 does not have new lines (\n)
-        # See https://pandoc.org/MANUAL.html#general-writer-options --wrap
-        pandoc_cmd.append("--wrap=none")
+            for defaults_file in defaults_files:
+                pandoc_cmd.append("--defaults={0}".format(defaults_file))
         return pandoc_cmd
 
     @staticmethod

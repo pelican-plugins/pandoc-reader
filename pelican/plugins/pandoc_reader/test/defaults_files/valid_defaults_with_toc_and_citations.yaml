@@ -1,9 +1,10 @@
-# valid_defaults_with_toc_and_citations.yml
+# valid_defaults_with_toc_and_citations.yaml
 #
-# A test default file that is valid and sets table_of_contents to true and enables citations
+# A defaults file that is valid and sets table-of-contents to true and enables citations.
 #
 reader: markdown+smart
 writer: html5
+wrap: none
 
 table-of-contents: true
 

@@ -1,8 +1,8 @@
-# no_input_format.yaml
+# no_output_format.yaml
 #
-# A test default file that specifies no input format
+# A defaults file that specifies no output format which is invalid.
 #
-writer: html5
+reader: markdown
 
 html-math-method:
   method: mathjax

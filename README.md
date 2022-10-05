@@ -29,7 +29,7 @@ python -m pip install pelican-pandoc-reader
 Configuration
 -------------
 
-This plugin converts [Pandoc’s variant of Markdown][] into HTML. Conversion from other Markdown variants is supported but requires the use of [Pandoc default files][].
+This plugin converts [Pandoc’s variant of Markdown][] into HTML. Conversion from other Markdown variants is supported but requires the use of a [Pandoc defaults file][].
 
 Converting to output formats other than HTML is not supported.
 
@@ -93,29 +93,29 @@ PANDOC_EXTENSIONS = [
 ]
 ```
 
-#### Method Two: Using Pandoc Default Files
+#### Method Two: Using Pandoc Defaults Files
 
-The second method involves specifying the path(s) to one or more [Pandoc default files][], with all your preferences written in YAML format.
+The second method involves specifying the path(s) to one or more [Pandoc defaults files][], with all your preferences written in YAML format.
 
-These paths should be set in your Pelican settings file by using the setting `PANDOC_DEFAULT_FILES`. The paths may be absolute or relative, but relative paths are recommended as they are more portable.
+These paths should be set in your Pelican settings file by using the setting `PANDOC_DEFAULTS_FILES`. The paths may be absolute or relative, but relative paths are recommended as they are more portable.
 
 ```python
-PANDOC_DEFAULT_FILES = [
-    "<path/to/default/file_one.yaml>",
-    "<path/to/default/file_two.yaml>",
+PANDOC_DEFAULTS_FILES = [
+    "<path/to/defaults/file_one.yaml>",
+    "<path/to/defaults/file_two.yaml>",
 ]
 ```
 
-Here is a minimal example of content that should be available in a Pandoc default file:
+Here is a minimal example of content that should be available in a Pandoc defaults file:
 
 ```yaml
 reader: markdown
 writer: html5
 ```
 
-Using default files has the added benefit of allowing you to use other Markdown variants supported by Pandoc, such as [CommonMark](https://commonmark.org/) and [GitHub-Flavored Markdown](https://docs.github.com/en/free-pro-team@latest/github/writing-on-github).
+Using defaults files has the added benefit of allowing you to use other Markdown variants supported by Pandoc, such as [CommonMark](https://commonmark.org/) and [GitHub-Flavored Markdown](https://docs.github.com/en/free-pro-team@latest/github/writing-on-github).
 
-Please see [Pandoc default files][] for a more complete example.
+Please see [Pandoc defaults files][] for a more complete example.
 
 > ⚠️ **Note:** Neither method supports the `--standalone` or `--self-contained` arguments, which will yield an error if invoked.
 
@@ -137,7 +137,7 @@ PANDOC_ARGS = [
 ]
 ```
 
-To add a ToC via a Pandoc default file, use the syntax below:
+To add a ToC via a Pandoc defaults file, use the syntax below:
 
 ```yaml
 table-of-contents: true
@@ -165,7 +165,7 @@ PANDOC_ARGS = [
 ]
 ```
 
-If you are using a Pandoc default file, you need the following as a bare minimum to enable citations:
+If you are using a Pandoc defaults file, you need the following as a bare minimum to enable citations:
 
 ```yaml
 reader: markdown
@@ -176,7 +176,7 @@ citeproc: true
 
 Without these settings, citations will not be processed by the plugin.
 
-It is not necessary to specify the `+citations` extension since it is enabled by default. However, if you were to disable citations by specifying `-citations` in `PANDOC_EXTENSIONS` or by setting `reader: markdown-citations` in your default file, citations will **not** work.
+It is not necessary to specify the `+citations` extension since it is enabled by default. However, if you were to disable citations by specifying `-citations` in `PANDOC_EXTENSIONS` or by setting `reader: markdown-citations` in your defaults file, citations will **not** work.
 
 You may write your bibliography in any format supported by Pandoc with the appropriate extensions specified. However, you **must** name the bibliography file the same as your post.
 
@@ -192,7 +192,7 @@ PANDOC_ARGS = [
 ]
 ```
 
-Or in a Pandoc default file:
+Or in a Pandoc defaults file:
 
 ```yaml
 csl: "https://www.zotero.org/styles/ieee-with-url"
@@ -208,7 +208,7 @@ PANDOC_ARGS = [
 ]
 ```
 
-Or in a Pandoc default file:
+Or in a Pandoc defaults file:
 
 ```yaml
 csl: "path/to/file/ieee-with-url.csl"
@@ -263,4 +263,4 @@ This project is licensed under the AGPL-3.0 license.
 
 [Pelican]: https://getpelican.com
 [Pandoc’s variant of Markdown]: https://pandoc.org/MANUAL.html#pandocs-markdown
-[Pandoc default files]: https://pandoc.org/MANUAL.html#default-files
+[Pandoc defaults files]: https://pandoc.org/MANUAL.html#default-files

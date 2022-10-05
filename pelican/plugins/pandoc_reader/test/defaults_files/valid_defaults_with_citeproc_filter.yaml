@@ -1,9 +1,10 @@
-# valid_defaults_with_citeproc_filter.yml
+# valid_defaults_with_citeproc_filter.yaml
 #
-# A test default file that is valid and sets citeproc as a filter
+# A defaults file that is valid and sets citeproc as a filter.
 #
 reader: markdown+smart
 writer: html5
+wrap: none
 
 html-math-method:
   method: mathjax

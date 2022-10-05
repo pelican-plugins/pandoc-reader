@@ -1,16 +1,18 @@
-"""Tests using invalid arguments and extensions for pandoc-reader plugin."""
+"""Test using invalid arguments and extensions with the pandoc-reader plugin."""
 import os
 import unittest
 
+from pelican.plugins.pandoc_reader import PandocReader
 from pelican.tests.support import get_settings
 
-from pandoc_reader import PandocReader
-
 DIR_PATH = os.path.dirname(__file__)
-TEST_CONTENT_PATH = os.path.abspath(os.path.join(DIR_PATH, "test_content"))
+TEST_CONTENT_PATH = os.path.abspath(os.path.join(DIR_PATH, "markdown"))
 
-# Test settings that will be set in pelicanconf.py by plugin users
-PANDOC_ARGS = ["--mathjax"]
+# These settings will be set in pelicanconf.py by plugin users.
+# Appending --wrap=None so that rendered HTML5 does not have new lines (\n)
+# which causes tests to fail.
+# See https://pandoc.org/MANUAL.html#general-writer-options
+PANDOC_ARGS = ["--mathjax", "--wrap=none"]
 PANDOC_EXTENSIONS = ["+smart"]
 
 

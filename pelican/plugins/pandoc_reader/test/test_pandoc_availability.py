@@ -1,25 +1,27 @@
-"""Test if pandoc executable is available."""
+"""Test if a supported version of the pandoc executable is available."""
 import os
 import shutil
 import unittest
 
+from pelican.plugins.pandoc_reader import PandocReader
 from pelican.tests.support import get_settings
 
-from pandoc_reader import PandocReader
-
 DIR_PATH = os.path.dirname(__file__)
-TEST_CONTENT_PATH = os.path.abspath(os.path.join(DIR_PATH, "test_content"))
+TEST_CONTENT_PATH = os.path.abspath(os.path.join(DIR_PATH, "markdown"))
 
-# Test settings that will be set in pelicanconf.py by plugin users
-PANDOC_ARGS = ["--mathjax"]
+# These settings will be set in pelicanconf.py by plugin users.
+# Appending --wrap=None so that rendered HTML5 does not have new lines (\n)
+# which causes tests to fail.
+# See https://pandoc.org/MANUAL.html#general-writer-options
+PANDOC_ARGS = ["--mathjax", "--wrap=none"]
 PANDOC_EXTENSIONS = ["+smart"]
 
 
 class TestPandocAvailability(unittest.TestCase):
-    """Test Pandoc availability."""
+    """Test if a support version of the pandoc executable is available."""
 
     def test_pandoc_availability_one(self):
-        """Check if Pandoc executable is available."""
+        """Check if pandoc executable is available."""
         settings = get_settings(
             PANDOC_EXTENSIONS=PANDOC_EXTENSIONS,
             PANDOC_ARGS=PANDOC_ARGS,

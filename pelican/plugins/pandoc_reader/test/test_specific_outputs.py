@@ -1,26 +1,28 @@
-"""Tests reading time and summary output from pandoc-reader plugin."""
+"""Test reading time and summary output from the pandoc-reader plugin."""
 import os
 import unittest
 
+from pelican.plugins.pandoc_reader import PandocReader
 from pelican.tests.support import get_settings
 
-from pandoc_reader import PandocReader
-
 DIR_PATH = os.path.dirname(__file__)
-TEST_CONTENT_PATH = os.path.abspath(os.path.join(DIR_PATH, "test_content"))
+TEST_CONTENT_PATH = os.path.abspath(os.path.join(DIR_PATH, "markdown"))
 
-# Test settings that will be set in pelicanconf.py by plugin users
-PANDOC_ARGS = ["--mathjax"]
+# These settings will be set in pelicanconf.py by plugin users.
+# Appending --wrap=None so that rendered HTML5 does not have new lines (\n)
+# which causes tests to fail.
+# See https://pandoc.org/MANUAL.html#general-writer-options
+PANDOC_ARGS = ["--mathjax", "--wrap=none"]
 PANDOC_EXTENSIONS = ["+smart"]
 CALCULATE_READING_TIME = True
 FORMATTED_FIELDS = ["summary"]
 
 
 class TestReadingTimeAndSummary(unittest.TestCase):
-    """Test reading time and summary formatted field."""
+    """Test reading time and summary formatted fields."""
 
     def test_default_wpm_reading_time(self):
-        """Check if 200 words per minute give us reading time of 1 minute."""
+        """Check if 200 words per minute gives us a reading time of 1 minute."""
         settings = get_settings(
             PANDOC_EXTENSIONS=PANDOC_EXTENSIONS,
             PANDOC_ARGS=PANDOC_ARGS,
@@ -34,7 +36,7 @@ class TestReadingTimeAndSummary(unittest.TestCase):
         self.assertEqual("1 minute", str(metadata["reading_time"]))
 
     def test_user_defined_wpm_reading_time(self):
-        """Check if 100 words per minute user defined gives us 2 minutes."""
+        """Check if a user defined 100 words per minute gives us 2 minutes."""
         settings = get_settings(
             PANDOC_EXTENSIONS=PANDOC_EXTENSIONS,
             PANDOC_ARGS=PANDOC_ARGS,
@@ -49,7 +51,7 @@ class TestReadingTimeAndSummary(unittest.TestCase):
         self.assertEqual("2 minutes", str(metadata["reading_time"]))
 
     def test_invalid_user_defined_wpm(self):
-        """Check if exception is raised if words per minute is not a number."""
+        """Check if an exception is raised if words per minute is not a number."""
         settings = get_settings(
             PANDOC_EXTENSIONS=PANDOC_EXTENSIONS,
             PANDOC_ARGS=PANDOC_ARGS,

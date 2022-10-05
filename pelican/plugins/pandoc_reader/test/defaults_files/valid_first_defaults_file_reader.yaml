@@ -1,0 +1,12 @@
+# valid_first_defaults_file_reader.yaml
+#
+# A defaults file that sets a reader and writer formats and is used together with
+# valid_second_defaults_file_reader.yaml that the sets from attribute.
+# Taken together the defaults are invalid as you cannot set from and reader.
+#
+reader: markdown+smart
+writer: html5
+
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"

@@ -1,9 +1,9 @@
-# to_writer_both_given.yaml
+# from_reader_both_given.yaml
 #
-# A test default file that sets both reader and from
+# A defaults file that sets both the reader and from attributes which is invalid.
 #
 reader: markdown+smart
-to: html5
+from: markdown+smart
 writer: html5
 
 html-math-method:

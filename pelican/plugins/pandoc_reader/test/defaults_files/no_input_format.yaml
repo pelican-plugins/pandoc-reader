@@ -1,10 +1,8 @@
-# standalone_true.yaml
+# no_input_format.yaml
 #
-# A test default file that sets standalone to true
+# A defaults file that specifies no input format which is invalid.
 #
-reader: markdown+smart
 writer: html5
-standalone: true
 
 html-math-method:
   method: mathjax

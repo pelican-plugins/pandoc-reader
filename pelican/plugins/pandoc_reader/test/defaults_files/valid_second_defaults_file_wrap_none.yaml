@@ -1,0 +1,7 @@
+# valid_second_defaults_file_wrap_none.yaml
+#
+# A defaults that just specifies one attribute to be used as a dummy second
+# defaults file to test invalid attributes in the first defaults file
+# specified.
+#
+wrap: none
