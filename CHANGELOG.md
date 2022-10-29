@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+1.2.0 - 2022-10-29
+------------------
+
+* Deprecating `PANDOC_DEFAULT_FILES` setting in favour of `PANDOC_DEFAULTS_FILES`
+* Handle defaults files in a manner consistent with Pandoc's handling of these files
+
+Contributed by [nandac](https://github.com/nandac) via [PR #25](https://github.com/pelican-plugins/pandoc-reader/pull/25/)
+
+
 1.1.0 - 2021-02-16
 ------------------
 
