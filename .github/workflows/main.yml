@@ -40,20 +40,20 @@ jobs:
         run: |
           poetry run pip install --upgrade pip
           poetry install
-      - name: Install supported pandoc 2.18
+      - name: Install supported pandoc 2.19
         run: |
-          wget https://github.com/jgm/pandoc/releases/download/2.18/pandoc-2.18-1-amd64.deb
-          sudo dpkg -i pandoc-2.18-1-amd64.deb
+          wget https://github.com/jgm/pandoc/releases/download/2.19.2/pandoc-2.19.2-1-amd64.deb
+          sudo dpkg -i pandoc-2.19.2-1-amd64.deb
       - name: Install unsupported pandoc 2.10
         run: |
-          wget https://github.com/jgm/pandoc/releases/download/2.10/pandoc-2.10-linux-amd64.tar.gz
+          wget https://github.com/jgm/pandoc/releases/download/2.10.1/pandoc-2.10.1-linux-amd64.tar.gz
           sudo mkdir 2.10
-          sudo tar xvzf pandoc-2.10-linux-amd64.tar.gz --strip-components 1 -C 2.10
+          sudo tar xvzf pandoc-2.10.1-linux-amd64.tar.gz --strip-components 1 -C 2.10
       - name: Install unsupported pandoc 1.19
         run: |
-          wget https://github.com/jgm/pandoc/releases/download/1.19/pandoc-1.19-1-amd64.deb
+          wget https://github.com/jgm/pandoc/releases/download/1.19.2.1/pandoc-1.19.2.1-1-amd64.deb
           sudo mkdir 1.19
-          sudo ar p pandoc-1.19-1-amd64.deb data.tar.gz | sudo tar xvz --strip-components 2 -C 1.19
+          sudo ar p pandoc-1.19.2.1-1-amd64.deb data.tar.gz | sudo tar xvz --strip-components 2 -C 1.19
       - name: Run tests
         run: poetry run invoke tests
 
