@@ -8,7 +8,6 @@ Add PANDOC_EXECUTABLE_PATH setting to customize `pandoc` executable location
 
 [nandac](https://github.com/nandac) [PR #19](https://github.com/pelican-plugins/pandoc-reader/pull/19/)
 
-
 1.0.1 - 2021-02-05
 ------------------
 
