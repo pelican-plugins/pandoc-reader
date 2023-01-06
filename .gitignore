@@ -1,1 +1,5 @@
+.editorconfig
+.env
+env/
+*env/
 poetry.lock
