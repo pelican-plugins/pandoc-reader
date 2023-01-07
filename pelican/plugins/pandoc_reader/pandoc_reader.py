@@ -110,8 +110,11 @@ class PandocReader(BaseReader):
 
         # Find and add bibliography if citations are specified
         if citations:
-            if 'bibliography' in metadata_from_content:
-                pandoc_cmd.append("--bibliography={0}".format(metadata_from_content['bibliography']))
+            if 'bibliography' in metadata_from_content.keys():
+                filename = os.path.join(DIR_PATH, metadata_from_content['bibliography'])
+                print(filename)
+                pandoc_cmd.append("--bibliography={0}".format(filename))
+
             for bib_file in self._find_bibs(source_path):
                 pandoc_cmd.append("--bibliography={0}".format(bib_file))
 
