@@ -119,6 +119,13 @@ class PandocReader(BaseReader):
 
         # Find and add bibliography if citations are specified
         if citations:
+            
+            if 'csl' in metadata_from_content.keys():
+                csl = metadata_from_content['csl']
+                pandoc_cmd.append("--csl={0}".format(csl))
+            elif len(default_csl)>0:
+                pandoc_cmd.append("--csl={0}".format(default_csl))
+            
             if 'exclusive_bibliography' in metadata_from_content.keys():
                 filename = metadata_from_content['exclusive_bibliography']
                 pandoc_cmd.append("--bibliography={0}".format(filename))
