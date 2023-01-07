@@ -1,0 +1,8 @@
+# valid_defaults_file_2.yaml
+#
+# A defaults file that sets the table-of-contents to true and wrap to none and
+# is used together with the valid_defaults_file_1.yaml to test the valid
+# multiple defaults file case.
+#
+table-of-contents: true
+wrap: none

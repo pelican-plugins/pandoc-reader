@@ -1,0 +1,7 @@
+# valid_second_defaults_file_reader.yaml
+#
+# A defaults file that sets a from format and is used together with
+# valid_first_defaults_file_reader.yaml that the sets reader attribute.
+# Taken together the defaults are invalid as you cannot set from and reader.
+#
+from: markdown+smart

@@ -1,0 +1,10 @@
+# invalid_reader_input_format.yaml
+#
+# A defaults file that sets the reader attribute to an invalid input format.
+#
+reader: myinputformat
+writer: html5
+
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"

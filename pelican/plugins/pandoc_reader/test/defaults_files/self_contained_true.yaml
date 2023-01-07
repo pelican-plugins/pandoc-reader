@@ -1,0 +1,11 @@
+# self_contained_true.yaml
+#
+# A defaults file that sets self-contained to true which is invalid.
+#
+reader: markdown+smart
+writer: html5
+self-contained: true
+
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"

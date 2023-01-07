@@ -1,0 +1,11 @@
+# to_writer_both_given.yaml
+#
+# A defaults file that sets both the to and writer attributes which is invalid.
+#
+reader: markdown+smart
+to: html5
+writer: html5
+
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"

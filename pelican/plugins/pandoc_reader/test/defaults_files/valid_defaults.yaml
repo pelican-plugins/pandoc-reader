@@ -1,0 +1,11 @@
+# valid_defaults.yaaml
+#
+# A defaults file that is valid.
+#
+reader: markdown+smart
+writer: html5
+wrap: none
+
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"

@@ -1,0 +1,10 @@
+# invalid_from_input_format.yaml
+#
+# A defaults file that sets the from attribute to an invalid input format.
+#
+from: myinputformat
+to: html5
+
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
