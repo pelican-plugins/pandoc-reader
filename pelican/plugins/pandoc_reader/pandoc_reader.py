@@ -98,10 +98,16 @@ class PandocReader(BaseReader):
         # Check if source content has a YAML metadata block
         metadata_from_content = self._check_and_get_yaml_metadata_block(content)
 
+        # Get default bibliographies and csl
+        default_bibliographies = self.settings.get("DEFAULT_BIBLIOGRAPHIES", [])
+        default_csl = self.settings.get("DEFAULT_CSL", [])
+        print(default_bibliographies)
+
         # Check validity of arguments or defaults files
         table_of_contents, citations, defaults = self._validate_fields(
             defaults_files, arguments, extensions
         )
+        print(default_csl)
 
         # if 'exclusive_bibliography' is set in content, delete any 'bibliography' set in the arguments from the pandocdefaults.yaml file
         #if 'exclusive_bibliography' in metadata_from_content.keys():
