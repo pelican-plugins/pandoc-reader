@@ -120,17 +120,20 @@ class PandocReader(BaseReader):
         # Find and add bibliography if citations are specified
         if citations:
             if 'exclusive_bibliography' in metadata_from_content.keys():
-                filename = os.path.join(DIR_PATH, metadata_from_content['exclusive_bibliography'])
-                print(filename)
+                filename = metadata_from_content['exclusive_bibliography']
                 pandoc_cmd.append("--bibliography={0}".format(filename))
             else:
                 if 'bibliography' in metadata_from_content.keys():
-                    filename = os.path.join(DIR_PATH, metadata_from_content['bibliography'])
-                    print(filename)
+                    filename = metadata_from_content['bibliography']
                     pandoc_cmd.append("--bibliography={0}".format(filename))
 
                 for bib_file in self._find_bibs(source_path):
                     pandoc_cmd.append("--bibliography={0}".format(bib_file))
+                
+                if len(default_bibliographies)>0:
+                    for bib in default_bibliographies:
+                        pandoc_cmd.append("--bibliography={0}".format(bib))
+                    
 
         # Create HTML content using pandoc-reader-default.html template
         output = self._run_pandoc(pandoc_cmd, content)
