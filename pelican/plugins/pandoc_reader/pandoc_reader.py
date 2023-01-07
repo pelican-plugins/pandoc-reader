@@ -8,7 +8,6 @@ import subprocess
 import bs4
 from mwc.counter import count_words_in_markdown
 from ruamel.yaml import YAML, constructor
-import yaml
 
 from pelican import signals
 from pelican.readers import BaseReader
@@ -325,7 +324,14 @@ class PandocReader(BaseReader):
         metadata_block = '\n'.join(content_lines[0:yaml_block_end+2])
 
         # get dictionary from yaml
-        metadata_from_content = yaml.safe_load(metadata_block)
+        metadata_from_content = {}
+        try:
+            yaml = YAML()
+            metadata_from_content = yaml.load(metadata_block)
+        except constructor.DuplicateKeyError as duplicate_key_error:
+            raise ValueError(
+                "Duplicate keys defined in multiple defaults files."
+            ) from duplicate_key_error
 
         return metadata_from_content
 
