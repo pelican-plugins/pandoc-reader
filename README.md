@@ -1,3 +1,14 @@
+Jonathan Mair changes:
+
+- amended _check_yaml_metadata_block() so that in addition to validating the yaml block in the content it also returns the metadata contained as a dictionary. Renamed to: _check_and_get_yaml_metadata_block()
+
+To do:
+
+- check for bibliography in md_metadata and add if it's there
+- check for csl and replace if it's there
+
+
+
 Pandoc Reader: A Plugin for Pelican
 ===================================
 

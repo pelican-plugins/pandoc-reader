@@ -3,3 +3,57 @@
 env/
 *env/
 poetry.lock
+AUTHOR = 'Jonathan Mair'
+SITENAME = 'Jonathan Mair'
+SITESUBTITLE = 'Notes & Queries'
+
+SITEURL = ''
+
+PATH = 'content'
+
+TIMEZONE = 'Europe/Madrid'
+
+DEFAULT_LANG = 'en'
+
+THEME = 'themes/attila'
+
+# Feed generation is usually not desired when developing
+FEED_ALL_ATOM = None
+CATEGORY_FEED_ATOM = None
+TRANSLATION_FEED_ATOM = None
+AUTHOR_FEED_ATOM = None
+AUTHOR_FEED_RSS = None
+
+DISPLAY_PAGES_ON_MENU =  True
+
+
+# Blogroll
+LINKS = (('Pelican', 'https://getpelican.com/'),
+         ('Python.org', 'https://www.python.org/'),
+         ('Jinja2', 'https://palletsprojects.com/p/jinja/'),
+         ('You can modify those links in your config file', '#'),)
+
+# Social widget
+SOCIAL = (('LinkedIn', 'https://www.linkedin.com/in/jonathan-mair-phd/'),
+          ('Twitter', 'https://twitter.com/urtnas'),
+          ('Github', 'https://github.com/JonathanMair'),)
+
+DEFAULT_PAGINATION = 10
+
+# Uncomment following line if you want document-relative URLs when developing
+RELATIVE_URLS = True
+
+# https://github.com/pelican-plugins/sitemap
+SITEMAP = {
+    "format": "xml",
+    "priorities": {
+        "articles": 0.5,
+        "indexes": 0.5,
+        "pages": 0.5
+    },
+    "changefreqs": {
+        "articles": "monthly",
+        "indexes": "daily",
+        "pages": "monthly"
+    }
+}

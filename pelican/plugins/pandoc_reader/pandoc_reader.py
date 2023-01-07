@@ -8,6 +8,7 @@ import subprocess
 import bs4
 from mwc.counter import count_words_in_markdown
 from ruamel.yaml import YAML, constructor
+import yaml
 
 from pelican import signals
 from pelican.readers import BaseReader
@@ -95,7 +96,7 @@ class PandocReader(BaseReader):
             extensions = "".join(extensions)
 
         # Check if source content has a YAML metadata block
-        self._check_yaml_metadata_block(content)
+        self._check_and_get_yaml_metadata_block(content)
 
         # Check validity of arguments or defaults files
         table_of_contents, citations = self._validate_fields(
@@ -266,8 +267,10 @@ class PandocReader(BaseReader):
             raise Exception("Pandoc version must be 2.11 or higher.")
 
     @staticmethod
-    def _check_yaml_metadata_block(content):
-        """Check if the source content has a YAML metadata block."""
+    def _check_and_get_yaml_metadata_block(content):
+        """Check if the source content has a YAML metadata block.
+            Altered to return the metadata from 'content' in a dictionary
+        """
         # Check that the given content is not empty
         if not content:
             raise Exception("Could not find metadata. File is empty.")
@@ -289,6 +292,16 @@ class PandocReader(BaseReader):
         # Check if the end of the YAML block was found
         if not yaml_block_end:
             raise Exception("Could not find end of metadata block.")
+
+        # get the metadata block
+        metadata_block = '\n'.join(content_lines[0:yaml_block_end+2])
+        print(metadata_block)
+
+        # get dictionary from yaml
+        metadata_from_content = yaml.safe_load(metadata_block)
+
+        return metadata_from_content
+
 
     @staticmethod
     def _construct_pandoc_command(
