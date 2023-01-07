@@ -99,9 +99,12 @@ class PandocReader(BaseReader):
         metadata_from_content = self._check_and_get_yaml_metadata_block(content)
 
         # Check validity of arguments or defaults files
-        table_of_contents, citations = self._validate_fields(
+        table_of_contents, citations, defaults = self._validate_fields(
             defaults_files, arguments, extensions
         )
+
+        # if 'exclusive_bibliography' is set in content, delete any 'bibliography' set in the arguments from the pandocdefaults.yaml file
+        #if 'exclusive_bibliography' in metadata_from_content.keys():
 
         # Construct preliminary pandoc command
         pandoc_cmd = self._construct_pandoc_command(
@@ -110,13 +113,18 @@ class PandocReader(BaseReader):
 
         # Find and add bibliography if citations are specified
         if citations:
-            if 'bibliography' in metadata_from_content.keys():
-                filename = os.path.join(DIR_PATH, metadata_from_content['bibliography'])
+            if 'exclusive_bibliography' in metadata_from_content.keys():
+                filename = os.path.join(DIR_PATH, metadata_from_content['exclusive_bibliography'])
                 print(filename)
                 pandoc_cmd.append("--bibliography={0}".format(filename))
+            else:
+                if 'bibliography' in metadata_from_content.keys():
+                    filename = os.path.join(DIR_PATH, metadata_from_content['bibliography'])
+                    print(filename)
+                    pandoc_cmd.append("--bibliography={0}".format(filename))
 
-            for bib_file in self._find_bibs(source_path):
-                pandoc_cmd.append("--bibliography={0}".format(bib_file))
+                for bib_file in self._find_bibs(source_path):
+                    pandoc_cmd.append("--bibliography={0}".format(bib_file))
 
         # Create HTML content using pandoc-reader-default.html template
         output = self._run_pandoc(pandoc_cmd, content)
@@ -158,11 +166,12 @@ class PandocReader(BaseReader):
 
             # Check if table of contents has been requested
             table_of_contents = self._check_if_toc(arguments)
+            defaults = {}
         else:
             # Validate defaults files and get the citations
             # abd table of contents request value
-            citations, table_of_contents = self._check_defaults(defaults_files)
-        return table_of_contents, citations
+            citations, table_of_contents, defaults = self._check_defaults(defaults_files)
+        return table_of_contents, citations, defaults
 
     def _check_defaults(self, defaults_files):
         """Check if the given Pandoc defaults file has valid values."""
@@ -210,7 +219,7 @@ class PandocReader(BaseReader):
             if defaults.get("table-of-contents", ""):
                 table_of_contents = True
 
-        return citations, table_of_contents
+        return citations, table_of_contents, defaults
 
     def _calculate_reading_time(self, content):
         """Calculate time taken to read content."""

@@ -1,5 +1,7 @@
 Jonathan Mair changes:
 
+- change of plan: in order to replace csl where it is specified in the content metadata, it cannot be in the pandoc defaults file, at least not without a significant rewrite, since those files are called directly in the pandoc command, rather than being parsed by the plugin. So: default bibliographies will be added to the pelicanconf settings file and these will be overridden by 'csl' and 'exclusive_bibliography' in the content metadata
+
 - amended _check_yaml_metadata_block() so that in addition to validating the yaml block in the content it also returns the metadata contained as a dictionary. Renamed to: _check_and_get_yaml_metadata_block()
 
 To do:
