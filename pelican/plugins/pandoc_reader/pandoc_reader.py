@@ -113,6 +113,7 @@ class PandocReader(BaseReader):
 
         # Find and add bibliography if citations are specified
         if citations:
+<<<<<<< HEAD
             if 'exclusive_bibliography' in metadata_from_content.keys():
                 filename = os.path.join(DIR_PATH, metadata_from_content['exclusive_bibliography'])
                 print(filename)
@@ -125,6 +126,12 @@ class PandocReader(BaseReader):
 
                 for bib_file in self._find_bibs(source_path):
                     pandoc_cmd.append("--bibliography={0}".format(bib_file))
+=======
+            if 'bibliography' in metadata_from_content:
+                pandoc_cmd.append("--bibliography={0}".format(metadata_from_content['bibliography']))
+            for bib_file in self._find_bibs(source_path):
+                pandoc_cmd.append("--bibliography={0}".format(bib_file))
+>>>>>>> parent of 7c7aec7 (added bibliography from metadata with relative path and it's working)
 
         # Create HTML content using pandoc-reader-default.html template
         output = self._run_pandoc(pandoc_cmd, content)
