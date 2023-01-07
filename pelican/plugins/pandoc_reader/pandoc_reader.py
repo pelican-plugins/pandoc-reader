@@ -101,13 +101,11 @@ class PandocReader(BaseReader):
         # Get default bibliographies and csl
         default_bibliographies = self.settings.get("DEFAULT_BIBLIOGRAPHIES", [])
         default_csl = self.settings.get("DEFAULT_CSL", [])
-        print(default_bibliographies)
 
         # Check validity of arguments or defaults files
         table_of_contents, citations, defaults = self._validate_fields(
             defaults_files, arguments, extensions
         )
-        print(default_csl)
 
         # if 'exclusive_bibliography' is set in content, delete any 'bibliography' set in the arguments from the pandocdefaults.yaml file
         #if 'exclusive_bibliography' in metadata_from_content.keys():
@@ -325,7 +323,6 @@ class PandocReader(BaseReader):
 
         # get the metadata block
         metadata_block = '\n'.join(content_lines[0:yaml_block_end+2])
-        print(metadata_block)
 
         # get dictionary from yaml
         metadata_from_content = yaml.safe_load(metadata_block)
