@@ -1,7 +1,7 @@
 Pelican Academic Bibliographies Plugin
 ======================================
 
-This plugin is a version of the Pelican Pandoc Reader Plugin, modified with a view to extending the flexibility of citation functionality. In all other respects the plugin is unaltered from the original. 
+This plugin is a version of the [Pelican Pandoc Reader Plugin](https://github.com/pelican-plugins/pandoc-reader), modified with a view to extending the flexibility of citation functionality. In all other respects the plugin is unaltered from the original. 
 
 The original plugin provides citation functionality in the following manner: when citations are turned on in the plugin's configuration, the plugin searches the path of each file to be processed looking for a bibliography file with the same name but a different extension. For example, to provide references for `blog_post.md`, one would need to provide a bibliography file names `blog_post.bib`. A csl file can be provided in the pandoc defaults file. 
 
