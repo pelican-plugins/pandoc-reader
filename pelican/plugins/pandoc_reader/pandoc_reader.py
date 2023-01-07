@@ -96,7 +96,7 @@ class PandocReader(BaseReader):
             extensions = "".join(extensions)
 
         # Check if source content has a YAML metadata block
-        self._check_and_get_yaml_metadata_block(content)
+        metadata_from_content = self._check_and_get_yaml_metadata_block(content)
 
         # Check validity of arguments or defaults files
         table_of_contents, citations = self._validate_fields(
@@ -110,6 +110,8 @@ class PandocReader(BaseReader):
 
         # Find and add bibliography if citations are specified
         if citations:
+            if 'bibliography' in metadata_from_content:
+                pandoc_cmd.append("--bibliography={0}".format(metadata_from_content['bibliography']))
             for bib_file in self._find_bibs(source_path):
                 pandoc_cmd.append("--bibliography={0}".format(bib_file))
 
