@@ -110,7 +110,7 @@ class PandocReader(BaseReader):
         # Find and add bibliography if citations are specified
         if citations:
             for bib_file in self._find_bibs(source_path):
-                pandoc_cmd.append("--bibliography={0}".format(bib_file))
+                pandoc_cmd.append(f"--bibliography={bib_file}")
 
         # Create HTML content using pandoc-reader-default.html template
         output = self._run_pandoc(pandoc_cmd, content)
@@ -166,7 +166,7 @@ class PandocReader(BaseReader):
         # Get the data in all defaults files as a string
         defaults_data = ""
         for defaults_file in defaults_files:
-            with open(defaults_file, "r") as file_handle:
+            with open(defaults_file) as file_handle:
                 for line in file_handle.readlines():
                     defaults_data += line
 
@@ -216,7 +216,7 @@ class PandocReader(BaseReader):
             reading_time = math.ceil(float(wordcount) / float(reading_speed))
             if reading_time == 1:
                 time_unit = "minute"
-            reading_time = "{} {}".format(str(reading_time), time_unit)
+            reading_time = f"{str(reading_time)} {time_unit}"
         except ValueError as words_per_minute_nan:
             raise ValueError(
                 "READING_SPEED setting must be a number."
@@ -307,7 +307,7 @@ class PandocReader(BaseReader):
             pandoc_cmd.extend(arguments)
         else:
             for defaults_file in defaults_files:
-                pandoc_cmd.append("--defaults={0}".format(defaults_file))
+                pandoc_cmd.append(f"--defaults={defaults_file}")
         return pandoc_cmd
 
     @staticmethod
@@ -398,7 +398,7 @@ class PandocReader(BaseReader):
         """Check to see that only supported arguments have been passed."""
         for arg in arguments:
             if arg in UNSUPPORTED_ARGUMENTS:
-                raise ValueError("Argument {0} is not supported.".format(arg))
+                raise ValueError(f"Argument {arg} is not supported.")
 
     @staticmethod
     def _check_if_unsupported_settings(defaults):
@@ -406,7 +406,7 @@ class PandocReader(BaseReader):
         for arg in UNSUPPORTED_ARGUMENTS:
             arg = arg[2:]
             if defaults.get(arg, ""):
-                raise ValueError("The default {} should be set to false.".format(arg))
+                raise ValueError(f"The default {arg} should be set to false.")
 
     @staticmethod
     def _check_input_format(defaults):
@@ -422,10 +422,8 @@ class PandocReader(BaseReader):
         # Case where both reader and from are specified which is not supported
         if reader_input and from_input:
             raise ValueError(
-                (
-                    "Specifying both from and reader is not supported."
-                    " Please specify just one."
-                )
+                "Specifying both from and reader is not supported."
+                " Please specify just one."
             )
 
         if reader_input or from_input:
@@ -450,10 +448,8 @@ class PandocReader(BaseReader):
         # Case where both writer and to are specified which is not supported
         if writer_output and to_output:
             raise ValueError(
-                (
-                    "Specifying both to and writer is not supported."
-                    " Please specify just one."
-                )
+                "Specifying both to and writer is not supported."
+                " Please specify just one."
             )
 
         # Case where neither writer nor to value is set to html
@@ -462,9 +458,7 @@ class PandocReader(BaseReader):
             and to_output not in VALID_OUTPUT_FORMATS
         ):
             output_formats = " or ".join(VALID_OUTPUT_FORMATS)
-            raise ValueError(
-                "Output format type must be either {}.".format(output_formats)
-            )
+            raise ValueError(f"Output format type must be either {output_formats}.")
 
 
 def add_reader(readers):
