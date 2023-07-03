@@ -1,7 +1,7 @@
 Pandoc Reader: A Plugin for Pelican
 ===================================
 
-[![Build Status](https://img.shields.io/github/workflow/status/pelican-plugins/pandoc-reader/build)](https://github.com/pelican-plugins/pandoc-reader/actions)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/pelican-plugins/pandoc-reader/main.yml?branch=main)](https://github.com/pelican-plugins/pandoc-reader/actions)
 [![PyPI Version](https://img.shields.io/pypi/v/pelican-pandoc-reader)](https://pypi.org/project/pelican-pandoc-reader/)
 ![License](https://img.shields.io/pypi/l/pelican-pandoc-reader?color=blue)
 
