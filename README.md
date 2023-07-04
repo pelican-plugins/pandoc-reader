@@ -12,10 +12,10 @@ Requirements
 
 This plugin requires:
 
-* Python 3.7 or higher; and
+* Python 3.8 or higher; and
 * Pandoc 2.11 or higher [[Pandoc installation instructions](https://pandoc.org/installing.html)].
 
-By default, the plugin looks for a `pandoc` executable on your `PATH`. If you wish, [you can specify an alternative location for your `pandoc` executable](#customizing-path-for-pandoc-executable).
+By default, the plugin looks for a `pandoc` executable on your `PATH`. If you wish, [you may specify an alternative location for your `pandoc` executable](#customizing-the-path-for-the-pandoc-executable).
 
 Installation
 ------------
@@ -29,7 +29,7 @@ python -m pip install pelican-pandoc-reader
 Configuration
 -------------
 
-This plugin converts [Pandoc’s variant of Markdown][] into HTML. Conversion from other Markdown variants is supported but requires the use of a [Pandoc defaults file][].
+This plugin converts [Pandoc’s variant of Markdown][] into HTML. Conversion from other Markdown variants is supported but requires the use of a [Pandoc defaults file](https://pandoc.org/MANUAL.html#defaults-files).
 
 Converting to output formats other than HTML is not supported.
 
@@ -214,7 +214,7 @@ Or in a Pandoc defaults file:
 csl: "path/to/file/ieee-with-url.csl"
 ```
 
-### Calculating and Displaying Reading Time
+### Calculating and Displaying Reading Times
 
 This plugin may be used to calculate the estimated reading time of articles and pages by setting `CALCULATE_READING_TIME` to `True` in your Pelican settings file:
 
@@ -224,7 +224,7 @@ CALCULATE_READING_TIME = True
 
 You may display the estimated reading time using the `{{ article.reading_time }}` or `{{ page.reading_time }}` template variables. The unit of time will be displayed as “minute” for reading times less than or equal to one minute, or “minutes” for those greater than one minute.
 
-The reading time is calculated by dividing the number of words by the reading speed, which is the average number words read in a minute.
+The reading time is calculated by dividing the number of words by the reading speed, which is the average number of words read in a minute.
 
 The default value for reading speed is set to 200 words per minute, but may be customized by setting `READING_SPEED` to the desired words per minute value in your Pelican settings file:
 
@@ -234,7 +234,7 @@ READING_SPEED = <words-per-minute>
 
 The number of words in a document is calculated using the [Markdown Word Count](https://github.com/gandreadis/markdown-word-count) package.
 
-### Customizing Path for `pandoc` Executable
+### Customizing the Path for the `pandoc` Executable
 
 If your `pandoc` executable does not reside on your `PATH`, set the `PANDOC_EXECUTABLE_PATH` in your Pelican settings file to the absolute path of where your `pandoc` resides as shown below:
 
@@ -242,7 +242,7 @@ If your `pandoc` executable does not reside on your `PATH`, set the `PANDOC_EXEC
 PANDOC_EXECUTABLE_PATH = /path/to/my/pandoc
 ```
 
-This setting is useful in cases where the `pandoc` executable from your hosting provider is not recent enough, and you may need to install a version of Pandoc—compatible with this plugin—in a non-standard location.
+This setting is useful in cases where the `pandoc` executable from your hosting provider is not recent enough, and you may need to install a version of Pandoc-compatible with this plugin—in a non-standard location.
 
 Contributing
 ------------
