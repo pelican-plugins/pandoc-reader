@@ -37,24 +37,6 @@ class TestValidCasesWithDefaultsFiles(unittest.TestCase):
         self.assertEqual("My Author", str(metadata["author"]))
         self.assertEqual("2020-10-16 00:00:00", str(metadata["date"]))
 
-    def test_valid_file_with_valid_defaults_old_setting(self):
-        """Check if we get the expected output specifying valid defaults."""
-        pandoc_defaults_files = [
-            os.path.join(TEST_DEFAULTS_FILES_PATH, "valid_defaults.yaml")
-        ]
-
-        settings = get_settings(PANDOC_DEFAULT_FILES=pandoc_defaults_files)
-
-        pandoc_reader = PandocReader(settings)
-
-        source_path = os.path.join(TEST_CONTENT_PATH, "valid_content.md")
-        output, metadata = pandoc_reader.read(source_path)
-
-        self.assertEqual(HTML_VALID_TEXT, output)
-        self.assertEqual("Valid Content", str(metadata["title"]))
-        self.assertEqual("My Author", str(metadata["author"]))
-        self.assertEqual("2020-10-16 00:00:00", str(metadata["date"]))
-
     def test_mathjax_with_valid_defaults(self):
         """Check if mathematics is rendered correctly with valid defaults."""
         pandoc_defaults_files = [

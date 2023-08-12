@@ -82,12 +82,6 @@ class PandocReader(BaseReader):
         """Create HTML5 content."""
         # Get settings set in pelicanconf.py
         defaults_files = self.settings.get("PANDOC_DEFAULTS_FILES", [])
-
-        # Adding support for the old defaults file setting
-        # which will be removed in future versions of this plugin
-        if self.settings.get("PANDOC_DEFAULT_FILES", []):
-            defaults_files = self.settings.get("PANDOC_DEFAULT_FILES")
-
         arguments = self.settings.get("PANDOC_ARGS", [])
         extensions = self.settings.get("PANDOC_EXTENSIONS", [])
 
