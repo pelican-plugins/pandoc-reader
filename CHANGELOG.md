@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+2.0.0 - 2023-08-12
+------------------
+
+* Dropping support for Python 3.7
+* Removed `PANDOC_DEFAULT_FILES` in favour of `PANDOC_DEFAULTS_FILES`
+* Upgrade PyYAML and ruamel.yaml to the latest version available
+
 1.2.0 - 2022-10-29
 ------------------
 
