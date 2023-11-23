@@ -1,6 +1,14 @@
 CHANGELOG
 =========
 
+2.1.0 - 2023-11-23
+------------------
+
+* Using [wordcount Lua Filter](https://github.com/pandoc/lua-filters/tree/master/wordcount) instead of the [markdown-word-count](https://github.com/gandreadis/markdown-word-count) Python package to calculate word count
+
+Contributed by [nandac](https://github.com/nandac) via [PR #35](https://github.com/pelican-plugins/pandoc-reader/pull/35/)
+
+
 2.0.0 - 2023-08-12
 ------------------
 
