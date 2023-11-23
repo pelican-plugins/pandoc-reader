@@ -232,7 +232,7 @@ The default value for reading speed is set to 200 words per minute, but may be c
 READING_SPEED = <words-per-minute>
 ```
 
-The number of words in a document is calculated using the [Markdown Word Count](https://github.com/gandreadis/markdown-word-count) package.
+The number of words in a document is calculated using the [wordcount Lua Filter](https://github.com/pandoc/lua-filters/tree/master/wordcount).
 
 ### Customizing the Path for the `pandoc` Executable
 

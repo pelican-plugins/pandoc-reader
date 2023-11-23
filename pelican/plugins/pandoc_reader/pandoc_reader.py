@@ -6,7 +6,6 @@ import shutil
 import subprocess
 
 import bs4
-from mwc.counter import count_words_in_markdown
 from ruamel.yaml import YAML, constructor
 
 from pelican import signals
@@ -22,6 +21,7 @@ ENCODED_LINKS_TO_RAW_LINKS_MAP = {
     "%7Bfilename%7D": "{filename}",
 }
 FILE_EXTENSIONS = ["md", "mkd", "mkdn", "mdwn", "mdown", "markdown", "Rmd"]
+FILTERS_PATH = os.path.abspath(os.path.join(DIR_PATH, "filters"))
 PANDOC_READER_HTML_TEMPLATE = "pandoc-reader-default.html"
 PANDOC_SUPPORTED_MAJOR_VERSION = 2
 PANDOC_SUPPORTED_MINOR_VERSION = 11
@@ -128,7 +128,8 @@ class PandocReader(BaseReader):
         if self.settings.get("CALCULATE_READING_TIME", []):
             # Calculate reading time and add to metadata
             metadata["reading_time"] = self.process_metadata(
-                "reading_time", self._calculate_reading_time(content)
+                "reading_time",
+                self._calculate_reading_time(pandoc_executable, source_path),
             )
 
         return output, metadata
@@ -200,10 +201,28 @@ class PandocReader(BaseReader):
 
         return citations, table_of_contents
 
-    def _calculate_reading_time(self, content):
+    def _calculate_reading_time(self, pandoc_executable, source_path):
         """Calculate time taken to read content."""
         reading_speed = self.settings.get("READING_SPEED", DEFAULT_READING_SPEED)
-        wordcount = count_words_in_markdown(content)
+
+        # Use the workcount.lua filter to calulcate the reading time
+        output = subprocess.run(
+            [
+                pandoc_executable,
+                "--lua-filter",
+                os.path.join(FILTERS_PATH, "wordcount.lua"),
+                source_path,
+            ],
+            capture_output=True,
+            encoding="utf-8",
+            check=True,
+        )
+
+        # We have to extract the word count from stdout which looks like
+        # 102 words in body
+        # 536 characters in body
+        # 636 characters in body (including spaces)
+        wordcount = output.stdout.split()[0]
 
         time_unit = "minutes"
         try:
