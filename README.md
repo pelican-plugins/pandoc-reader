@@ -12,7 +12,7 @@ Requirements
 
 This plugin requires:
 
-* Python 3.8 or higher; and
+* Python 3.9 or higher; and
 * Pandoc 2.11 or higher [[Pandoc installation instructions](https://pandoc.org/installing.html)].
 
 By default, the plugin looks for a `pandoc` executable on your `PATH`. If you wish, [you may specify an alternative location for your `pandoc` executable](#customizing-the-path-for-the-pandoc-executable).
