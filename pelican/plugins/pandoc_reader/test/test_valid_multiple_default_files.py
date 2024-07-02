@@ -1,4 +1,5 @@
 """Test using multiple valid defaults files with the pandoc-reader plugin."""
+
 import os
 import unittest
 

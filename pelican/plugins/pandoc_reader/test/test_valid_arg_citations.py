@@ -1,4 +1,5 @@
 """Test using valid arguments and citations with the pandoc-reader plugin."""
+
 import os
 import unittest
 

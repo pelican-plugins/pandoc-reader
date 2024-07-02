@@ -1,4 +1,5 @@
 """Test if a supported version of the pandoc executable is available."""
+
 import os
 import shutil
 import unittest
