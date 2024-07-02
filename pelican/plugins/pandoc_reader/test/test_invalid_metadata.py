@@ -1,4 +1,5 @@
 """Test using invalid metadata with the pandoc-reader plugin."""
+
 import os
 import unittest
 
