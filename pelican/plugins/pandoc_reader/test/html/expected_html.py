@@ -11,15 +11,19 @@ HTML_WITH_CITATIONS = "\n".join(
             "which is a relative newcomer to theoretical physics, but one that has "
             "captured the common imagination, judging by the popular explanations "
             "that abound on the Web "
-            '<span class="citation" data-cites="mann2019 wood2019 jones2020">[1]–[3]'
+            '<span class="citation" data-cites="mann2019 wood2019 jones2020">'
+            "[1], [2], [3]"
             "</span>. And whether string theory is or is not science, Popper "
             "notwithstanding, is an issue that is still up for debate "
             '<span class="citation" '
             'data-cites="siegel2015 castelvecchi2016 alves2017 francis2019">'
-            "[4]–[7]</span>.</p>"
+            "[4], [5], [6], [7]</span>.</p>"
         ),
         '<h1 class="unnumbered" id="bibliography">References</h1>',
-        '<div class="references csl-bib-body" id="refs" role="list">',
+        (
+            '<div class="references csl-bib-body" data-entry-spacing="0" '
+            'id="refs" role="list">'
+        ),
         '<div class="csl-entry" id="ref-mann2019" role="listitem">',
         (
             '<div class="csl-left-margin">[1] </div><div class="csl-right-inline">'
