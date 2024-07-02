@@ -1,4 +1,5 @@
 """Test reading time and summary output from the pandoc-reader plugin."""
+
 import os
 import unittest
 
