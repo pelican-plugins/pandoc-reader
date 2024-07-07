@@ -30,7 +30,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = ">=3.9.0,<4.0"
 pelican = ">=4.5"
-markdown = {version = "<=3.3.4", optional = true}
+markdown = ">=3.6"
 pyyaml = "^6.0.0"
 beautifulsoup4 = "^4.9.3"
 "ruamel.yaml" = "^0.17.32"
@@ -43,7 +43,7 @@ flake8-black = "^0.2.0"
 invoke = "^2.0"
 isort = "^5.12.0"
 livereload = "^2.6"
-markdown = "<=3.3.4"
+markdown = ">=3.6"
 pytest = "^6.0"
 pytest-cov = "^2.8"
 pytest-pythonpath = "^0.7.3"
