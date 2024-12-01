@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+3.0.0 - 2024-12-01
+------------------
+
+* Dropping Support for Python 3.9
+* Updated Markdown Python package
+
+Contributed by [nandac](https://github.com/nandac) via [PR #42](https://github.com/pelican-plugins/pandoc-reader/pull/42/)
+
+
 2.1.0 - 2023-11-23
 ------------------
 
