@@ -3,6 +3,7 @@ Pandoc Reader: A Plugin for Pelican
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/pelican-plugins/pandoc-reader/main.yml?branch=main)](https://github.com/pelican-plugins/pandoc-reader/actions)
 [![PyPI Version](https://img.shields.io/pypi/v/pelican-pandoc-reader)](https://pypi.org/project/pelican-pandoc-reader/)
+[![Downloads](https://img.shields.io/pypi/dm/pelican-pandoc-reader)](https://pypi.org/project/pelican-pandoc-reader/)
 ![License](https://img.shields.io/pypi/l/pelican-pandoc-reader?color=blue)
 
 Pandoc Reader is a [Pelican][] plugin that converts documents written in [Pandoc’s variant of Markdown][] into HTML.
@@ -25,6 +26,8 @@ This plugin can be installed via:
 ```bash
 python -m pip install pelican-pandoc-reader
 ```
+
+As long as you have not explicitly added a `PLUGINS` setting to your Pelican settings file, then the newly-installed plugin should be automatically detected and enabled. Otherwise, you must add `pandoc_reader` to your existing `PLUGINS` list. For more information, please see the [How to Use Plugins](https://docs.getpelican.com/en/latest/plugins.html#how-to-use-plugins) documentation.
 
 Configuration
 -------------
