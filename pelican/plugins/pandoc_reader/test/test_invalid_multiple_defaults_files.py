@@ -55,8 +55,7 @@ class TestInvalidCasesWithMultipleDefaultsFiles(unittest.TestCase):
 
         message = str(context_manager.exception)
         self.assertEqual(
-            "Specifying both to and writer is not supported."
-            " Please specify just one.",
+            "Specifying both to and writer is not supported. Please specify just one.",
             message,
         )
 

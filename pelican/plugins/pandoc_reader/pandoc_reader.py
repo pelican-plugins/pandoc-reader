@@ -184,11 +184,9 @@ class PandocReader(BaseReader):
             citeproc_specified = False
 
             # Cases where citeproc is specified as citeproc: true
-            if defaults.get("citeproc", ""):
-                citeproc_specified = True
-
-            # Cases where citeproc is specified in filters
-            elif "citeproc" in defaults.get("filters", ""):
+            if defaults.get("citeproc", "") or "citeproc" in defaults.get(
+                "filters", ""
+            ):
                 citeproc_specified = True
 
             # The extension +citations is enabled by default in Pandoc 2.11
@@ -230,7 +228,7 @@ class PandocReader(BaseReader):
             reading_time = math.ceil(float(wordcount) / float(reading_speed))
             if reading_time == 1:
                 time_unit = "minute"
-            reading_time = f"{str(reading_time)} {time_unit}"
+            reading_time = f"{reading_time!s} {time_unit}"
         except ValueError as words_per_minute_nan:
             raise ValueError(
                 "READING_SPEED setting must be a number."
@@ -312,9 +310,7 @@ class PandocReader(BaseReader):
         pandoc_cmd = [
             pandoc_executable,
             "--standalone",
-            "--template={}".format(
-                os.path.join(TEMPLATES_PATH, PANDOC_READER_HTML_TEMPLATE)
-            ),
+            f"--template={os.path.join(TEMPLATES_PATH, PANDOC_READER_HTML_TEMPLATE)}",
         ]
         if not defaults_files:
             pandoc_cmd.extend(["--from", "markdown" + extensions, "--to", "html5"])
