@@ -390,17 +390,28 @@ class PandocReader(BaseReader):
                 table_of_contents = True
         return table_of_contents
 
-    @staticmethod
-    def _find_bibs(source_path):
+    def _find_bibs(self, source_path):
         """Find bibliographies recursively in the sourcepath given."""
         bib_files = []
         filename = os.path.splitext(os.path.basename(source_path))[0]
         directory_path = os.path.dirname(os.path.abspath(source_path))
+        
+        global_bib_names = self.settings.get(
+            "PANDOC_GLOBAL_BIB_FILES", 
+            ["_bibliography", "bibliography", "references"]
+        )
+        
         for root, _, files in os.walk(directory_path):
             for extension in VALID_BIB_EXTENSIONS:
                 bib_name = ".".join([filename, extension])
                 if bib_name in files:
                     bib_files.append(os.path.join(root, bib_name))
+                
+                for global_name in global_bib_names:
+                    global_bib_name = ".".join([global_name, extension])
+                    if global_bib_name in files:
+                        bib_files.append(os.path.join(root, global_bib_name))
+        
         return bib_files
 
     @staticmethod
