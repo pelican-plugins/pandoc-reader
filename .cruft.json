@@ -1,0 +1,28 @@
+{
+  "template": "https://github.com/getpelican/cookiecutter-pelican-plugin",
+  "commit": "8966a5d5f055ebfdeb0cf88758436eaf4cc62cd5",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "plugin_name": "Pandoc Reader",
+      "repo_name": "pandoc-reader",
+      "package_name": "pandoc_reader",
+      "distribution_name": "pelican-pandoc-reader",
+      "version": "3.0.0",
+      "description": "Pelican plugin for converting Pandoc's Markdown variant to HTML.",
+      "authors": "{name = \"Nandakumar Chandrasekhar\", email = \"navanitachora@gmail.com\"}, {name = \"Justin Mayer\", email = \"entroP@gmail.com\"}",
+      "keywords": "\"pelican\", \"plugin\", \"markdown\", \"pandoc\"",
+      "readme": "README.md",
+      "contributing": "CONTRIBUTING.md",
+      "license": "GNU Affero General Public License v3|AGPL-3.0",
+      "repo_url": "https://github.com/pelican-plugins/pandoc-reader",
+      "dev_status": "5 - Production/Stable",
+      "tests_exist": true,
+      "python_version": "~=3.9",
+      "pelican_version": ">=4.5",
+      "_template": "https://github.com/getpelican/cookiecutter-pelican-plugin",
+      "_commit": "8966a5d5f055ebfdeb0cf88758436eaf4cc62cd5"
+    }
+  },
+  "directory": null
+}

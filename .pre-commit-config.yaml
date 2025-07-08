@@ -20,30 +20,9 @@ repos:
       - id: forbid-new-submodules
       - id: trailing-whitespace
 
-  - repo: https://github.com/psf/black
-    rev: 24.10.0
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.12.2
     hooks:
-      - id: black
-
-  - repo: https://github.com/PyCQA/flake8
-    rev: 7.1.1
-    hooks:
-      - id: flake8
-        args: [--max-line-length=88]
-
-  - repo: https://github.com/PyCQA/isort
-    rev: 5.13.2
-    hooks:
-      - id: isort
-
-  - repo: https://github.com/asottile/pyupgrade
-    rev: v3.19.0
-    hooks:
-      - id: pyupgrade
-        args: [--py38-plus]
-
-  - repo: https://github.com/hakancelikdev/unimport
-    rev: 1.2.1
-    hooks:
-      - id: unimport
-        args: [--remove, --include-star-import]
+      - id: ruff-check
+      - id: ruff-format
+        args: ["--check"]

@@ -81,7 +81,7 @@ class TestValidCasesWithArguments(unittest.TestCase):
         """Check if expected output is returned with --toc argument."""
         settings = get_settings(
             PANDOC_EXTENSIONS=PANDOC_EXTENSIONS,
-            PANDOC_ARGS=PANDOC_ARGS + ["--toc"],
+            PANDOC_ARGS=[*PANDOC_ARGS, "--toc"],
         )
 
         pandoc_reader = PandocReader(settings)
@@ -101,7 +101,7 @@ class TestValidCasesWithArguments(unittest.TestCase):
         """Check if expected output is returned with --table-of-contents argument."""
         settings = get_settings(
             PANDOC_EXTENSIONS=PANDOC_EXTENSIONS,
-            PANDOC_ARGS=PANDOC_ARGS + ["--table-of-contents"],
+            PANDOC_ARGS=[*PANDOC_ARGS, "--table-of-contents"],
         )
 
         pandoc_reader = PandocReader(settings)

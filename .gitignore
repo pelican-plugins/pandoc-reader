@@ -1,3 +1,2 @@
-poetry.lock
-Pipfile
-Pipfile.lock
+.pdm-python
+pdm.lock
