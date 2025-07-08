@@ -181,9 +181,31 @@ Without these settings, citations will not be processed by the plugin.
 
 It is not necessary to specify the `+citations` extension since it is enabled by default. However, if you were to disable citations by specifying `-citations` in `PANDOC_EXTENSIONS` or by setting `reader: markdown-citations` in your defaults file, citations will **not** work.
 
-You may write your bibliography in any format supported by Pandoc with the appropriate extensions specified. However, you **must** name the bibliography file the same as your post.
+You may write your bibliography in any format supported by Pandoc with the appropriate extensions specified. The plugin supports both individual and global bibliography files.
 
-For example, a post with the file name `my-post.md` should have a bibliography file called `my-post.bib`, `my-post.json`, `my-post.yaml` or `my-post.bibtex` in the same directory as your post, or in a subdirectory of the directory that your blog resides in. Failure to do so will prevent the references from being picked up.
+#### Individual Bibliography Files
+
+By default, the plugin looks for bibliography files that have the same name as your post. For example, a post with the file name `my-post.md` should have a bibliography file called `my-post.bib`, `my-post.json`, `my-post.yaml` or `my-post.bibtex` in the same directory as your post, or in a subdirectory of the directory that your blog resides in.
+
+#### Global Bibliography Files
+
+You can also use global bibliography files that contain references for multiple articles. The plugin will automatically search for global bibliography files with the following default names:
+
+* `_bibliography.bib`, `_bibliography.json`, `_bibliography.yaml`, `_bibliography.bibtex`
+* `bibliography.bib`, `bibliography.json`, `bibliography.yaml`, `bibliography.bibtex`
+* `references.bib`, `references.json`, `references.yaml`, `references.bibtex`
+
+To customize the global bibliography file names, set the `PANDOC_GLOBAL_BIB_FILES` setting in your Pelican settings file:
+
+```python
+PANDOC_GLOBAL_BIB_FILES = ["my_bib", "global_refs", "shared_bibliography"]
+```
+
+This will make the plugin search for files like `my_bib.bib`, `global_refs.bib`, etc.
+
+#### Bibliography File Priority
+
+The plugin searches for both individual and global bibliography files. If both types exist, all found bibliography files will be used by Pandoc. The order in which they are processed follows the order they are discovered during the recursive directory search.
 
 #### Known Issues with Citations
 
