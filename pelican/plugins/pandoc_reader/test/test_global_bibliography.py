@@ -4,9 +4,6 @@ import os
 import unittest
 
 from pelican.plugins.pandoc_reader import PandocReader
-from pelican.plugins.pandoc_reader.test.html.expected_html import (
-    HTML_WITH_CITATIONS,
-)
 from pelican.tests.support import get_settings
 
 DIR_PATH = os.path.dirname(__file__)
@@ -58,10 +55,14 @@ class TestGlobalBibliography(unittest.TestCase):
         )
 
         pandoc_reader = PandocReader(settings)
-        source_path = os.path.join(TEST_CONTENT_PATH, "content_with_custom_global_bib.md")
+        source_path = os.path.join(
+            TEST_CONTENT_PATH, "content_with_custom_global_bib.md"
+        )
         output, metadata = pandoc_reader.read(source_path)
 
-        self.assertEqual("Content With Custom Global Bibliography", str(metadata["title"]))
+        self.assertEqual(
+            "Content With Custom Global Bibliography", str(metadata["title"])
+        )
         self.assertEqual("My Author", str(metadata["author"]))
         self.assertEqual("2020-10-16 00:00:00", str(metadata["date"]))
 
@@ -103,13 +104,17 @@ class TestGlobalBibliography(unittest.TestCase):
         )
 
         pandoc_reader = PandocReader(settings)
-        source_path = os.path.join(TEST_CONTENT_PATH, "content_with_multiple_global_bibs.md")
+        source_path = os.path.join(
+            TEST_CONTENT_PATH, "content_with_multiple_global_bibs.md"
+        )
         output, metadata = pandoc_reader.read(source_path)
 
-        self.assertEqual("Content With Multiple Global Bibliographies", str(metadata["title"]))
+        self.assertEqual(
+            "Content With Multiple Global Bibliographies", str(metadata["title"])
+        )
         self.assertEqual("My Author", str(metadata["author"]))
         self.assertEqual("2020-10-16 00:00:00", str(metadata["date"]))
 
 
 if __name__ == "__main__":
-    unittest.main() 
+    unittest.main()
