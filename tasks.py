@@ -7,6 +7,11 @@ from shutil import which
 from invoke import task
 
 logger = logging.getLogger(__name__)
+level = logging.INFO
+logger.setLevel(level)
+console_handler = logging.StreamHandler()
+console_handler.setLevel(level)
+logger.addHandler(console_handler)
 
 PKG_NAME = "pandoc_reader"
 PKG_PATH = Path(f"pelican/plugins/{PKG_NAME}")
@@ -18,11 +23,11 @@ VENV = str(VENV_PATH.expanduser())
 BIN_DIR = "bin" if os.name != "nt" else "Scripts"
 VENV_BIN = Path(VENV) / Path(BIN_DIR)
 
-TOOLS = ("cruft", "pdm", "pre-commit")
+TOOLS = ("cruft", "pdm", "prek")
 PDM = which("pdm") if which("pdm") else (VENV_BIN / "pdm")
 CMD_PREFIX = f"{VENV_BIN}/" if ACTIVE_VENV else f"{PDM} run "
 CRUFT = which("cruft") if which("cruft") else f"{CMD_PREFIX}cruft"
-PRECOMMIT = which("pre-commit") if which("pre-commit") else f"{CMD_PREFIX}pre-commit"
+PRECOMMIT = which("prek") if which("prek") else f"{CMD_PREFIX}prek"
 PTY = os.name != "nt"
 
 

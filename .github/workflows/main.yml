@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           persist-credentials: false
 
@@ -31,10 +31,10 @@ jobs:
       - name: Install dependencies
         run: pdm install
 
-      - name: Install supported Pandoc 3.5
+      - name: Install supported Pandoc 3.10
         run: |
-          wget https://github.com/jgm/pandoc/releases/download/3.5/pandoc-3.5-1-amd64.deb
-          sudo dpkg -i pandoc-3.5-1-amd64.deb
+          wget https://github.com/jgm/pandoc/releases/download/3.10/pandoc-3.10-1-amd64.deb
+          sudo dpkg -i pandoc-3.10-1-amd64.deb
 
       - name: Install unsupported Pandoc 2.10
         run: |
@@ -56,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           persist-credentials: false
 
@@ -68,7 +68,7 @@ jobs:
       - name: Set up Python & PDM
         uses: pdm-project/setup-pdm@v4
         with:
-          python-version: "3.10"
+          python-version: "3.11"
 
       - name: Install dependencies
         run: pdm install
@@ -88,12 +88,12 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: "3.10"
+          python-version: "3.11"
 
       - name: Check release
         id: check_release
