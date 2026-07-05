@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+3.0.2 - 2026-07-05
+------------------
+
+* Updated version of docutils
+* Pulled in changes from upstream
+
 3.0.0 - 2024-12-01
 ------------------
 

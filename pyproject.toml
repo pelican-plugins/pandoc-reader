@@ -1,6 +1,6 @@
 [project]
 name = "pelican-pandoc-reader"
-version = "3.0.1"
+version = "3.0.2"
 description = "Pelican plugin for converting Pandoc's Markdown variant to HTML."
 authors = [{name = "Nandakumar Chandrasekhar", email = "navanitachora@gmail.com"}, {name = "Justin Mayer", email = "entroP@gmail.com"}]
 license = {text = "AGPL-3.0"}
