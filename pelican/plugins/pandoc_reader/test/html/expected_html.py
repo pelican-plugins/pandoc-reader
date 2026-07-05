@@ -28,88 +28,80 @@ HTML_WITH_CITATIONS = "\n".join(
         (
             '<div class="csl-left-margin">[1] </div><div class="csl-right-inline">'
             "A. Mann, "
-            "<span>“<span>What Is String Theory?</span>”</span> Mar. 20, 2019. "
-            "Available: "
+            "<span>“<span>What Is String Theory?</span>”</span>"
+            " Accessed: Nov. 12, 2020. [Online]. Available: "
             '<a href="https://www.livescience.com/65033-what-is-string-theory.html">'
-            "https://www.livescience.com/65033-what-is-string-theory.html</a>. "
-            "[Accessed: Nov. 12, 2020]</div>"
+            "https://www.livescience.com/65033-what-is-string-theory.html</a></div>"
         ),
         "</div>",
         '<div class="csl-entry" id="ref-wood2019" role="listitem">',
         (
             '<div class="csl-left-margin">[2] </div><div class="csl-right-inline">'
-            "C. Wood, <span>“<span>What Is String Theory?</span>. Reference article: "
-            "A simplified explanation and brief history of string theory,”</span> "
-            'Jul. 11, 2019. Available: <a href="https://www.space.com/'
-            "17594-string-theory"
-            '.html">https://www.space.com/17594-string-theory.html</a>. '
-            "[Accessed: Nov. 12, 2020]</div>"
+            "C. Wood, "
+            "<span>“<span>What Is String Theory?</span>. Reference article: "
+            "A simplified explanation and brief history of string theory.”</span>"
+            " Accessed: Nov. 12, 2020. [Online]. Available: "
+            '<a href="https://www.space.com/17594-string-theory.html">'
+            "https://www.space.com/17594-string-theory.html</a></div>"
         ),
         "</div>",
         '<div class="csl-entry" id="ref-jones2020" role="listitem">',
         (
             '<div class="csl-left-margin">[3] </div><div class="csl-right-inline">'
             'A. Z. Jones, <span>“<span class="nocase">The Basics of String Theory'
-            "</span>,"
-            '”</span> Mar. 02, 2019. Available: <a href="https://www.thoughtco.com/'
-            'what-is-string-theory-2699363">https://www.thoughtco.com/'
-            "what-is-string-theory-2699363</a>. [Accessed: Nov. 12, 2020]</div>"
+            "</span>.”</span>"
+            " Accessed: Nov. 12, 2020. [Online]. Available: "
+            '<a href="https://www.thoughtco.com/what-is-string-theory-2699363">'
+            "https://www.thoughtco.com/what-is-string-theory-2699363</a></div>"
         ),
         "</div>",
         '<div class="csl-entry" id="ref-siegel2015" role="listitem">',
         (
             '<div class="csl-left-margin">[4] </div><div class="csl-right-inline">'
             "E. Siegel, "
-            "<span>“<span>Why String Theory Is Not A Scientific Theory</span>,”</span> "
-            "Dec. "
-            '23, 2015. Available: <a href="https://www.forbes.com/sites/startswithabang'
-            '/2015/12/23/why-string-theory-is-not-science/">https://www.forbes.com'
-            "/sites/"
-            "startswithabang/2015/12/23/why-string-theory-is-not-science/</a>. "
-            "[Accessed: "
-            "Nov. 12, 2020]</div>"
+            "<span>“<span>Why String Theory Is Not A Scientific Theory"
+            "</span>.”</span>"
+            " Accessed: Nov. 12, 2020. [Online]. Available: "
+            '<a href="https://www.forbes.com/sites/startswithabang'
+            '/2015/12/23/why-string-theory-is-not-science/">'
+            "https://www.forbes.com/sites/startswithabang"
+            "/2015/12/23/why-string-theory-is-not-science/</a></div>"
         ),
         "</div>",
         '<div class="csl-entry" id="ref-castelvecchi2016" role="listitem">',
         (
             '<div class="csl-left-margin">[5] </div><div class="csl-right-inline">D. '
             'Castelvecchi, <span>“<span class="nocase">Feuding physicists turn to '
-            "philosophy "
-            "for help</span>. String theory is at the heart of a debate over the "
-            "integrity of "
-            "the scientific method itself,”</span> Jan. 05, 2016. Available: "
+            "philosophy for help</span>. String theory is at the heart of a debate "
+            "over the integrity of the scientific method itself.”</span>"
+            " Accessed: Nov. 12, 2020. [Online]. Available: "
             '<a href="https://www.nature.com/news/feuding-physicists-turn-to-philosophy'
-            "-for-"
-            'help-1.19076">https://www.nature.com/news/feuding-physicists-turn-to-'
-            "philosophy-"
-            "for-help-1.19076</a>. [Accessed: Nov. 12, 2020]</div>"
+            '-for-help-1.19076">'
+            "https://www.nature.com/news/feuding-physicists-turn-to-philosophy"
+            "-for-help-1.19076</a></div>"
         ),
         "</div>",
         '<div class="csl-entry" id="ref-alves2017" role="listitem">',
         (
             '<div class="csl-left-margin">[6] </div><div class="csl-right-inline">R. '
-            'A. Batista and J. Primack, <span>“<span class="nocase">Is String theory '
-            "falsifiable?</span>. Can a theory that isn’t completely testable still be "
-            "useful "
-            'to physics?”</span> Available: <a href="https://metafact.io/factchecks/'
-            "30-is-"
-            'string-theory-falsifiable">https://metafact.io/factchecks/30-is-string-'
-            "theory-"
-            "falsifiable</a>. [Accessed: Nov. 12, 2020]</div>"
+            'A. Batista and J. Primack, <span>“<span class="nocase">Is String '
+            "theory falsifiable?</span>. Can a theory that isn’t completely testable "
+            "still be useful to physics?”</span>"
+            " Accessed: Nov. 12, 2020. [Online]. Available: "
+            '<a href="https://metafact.io/factchecks/30-is-string-theory-falsifiable">'
+            "https://metafact.io/factchecks/30-is-string-theory-falsifiable</a></div>"
         ),
         "</div>",
         '<div class="csl-entry" id="ref-francis2019" role="listitem">',
         (
             '<div class="csl-left-margin">[7] </div><div class="csl-right-inline">'
-            "M. R. "
-            'Francis, <span>“<span class="nocase">Falsifiability and physics</span>. '
-            "Can a theory that isn’t completely testable still be useful to physics?”"
-            "</span> "
-            'Apr. 23, 2019. Available: <a href="https://www.scientificamerican.com/'
-            "article/"
-            'is-string-theory-science/">https://www.scientificamerican.com/article/'
-            "is-string-"
-            "theory-science/</a>. [Accessed: Nov. 12, 2020]</div>"
+            "M. R. Francis, "
+            '<span>“<span class="nocase">Falsifiability and physics</span>. '
+            "Can a theory that isn’t completely testable still be useful to physics?"
+            "”</span>"
+            " Accessed: Nov. 12, 2020. [Online]. Available: "
+            '<a href="https://www.scientificamerican.com/article/is-string-theory-science/">'
+            "https://www.scientificamerican.com/article/is-string-theory-science/</a></div>"
         ),
         "</div>",
         "</div>",
